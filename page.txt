@@ -1,0 +1,336 @@
+"use client"
+
+import Image from "next/image"
+import Link from "next/link"
+import TarjetaProducto from "./TarjetaProducto"
+
+export default function DetalleProductoCliente({ producto, relacionados, categoria, subcategoria }) {
+
+  if (!producto) return (
+    <div className="max-w-7xl mx-auto px-8 py-20 text-center">
+      <p className="text-gris">Producto no encontrado.</p>
+    </div>
+  )
+
+  return (
+    <div className="max-w-7xl mx-auto px-8 py-12 flex flex-col gap-16">
+
+      {/* Detalle principal */}
+      <div className="grid grid-cols-2 gap-12">
+
+        {/* Imagen */}
+        <div className="relative h-[500px] overflow-hidden">
+          <Image
+            src={producto.imagen}
+            alt={producto.nombre}
+            fill
+            className="object-cover"
+          />
+        </div>
+
+        {/* Info */}
+        <div className="flex flex-col justify-center gap-6">
+
+          <div>
+            <span className="font-cursiva text-dorado text-xl">
+              {subcategoria.replace(/-/g, " ")}
+            </span>
+            <h1 className="font-sans font-bold text-4xl text-primary mt-1">
+              {producto.nombre}
+            </h1>
+          </div>
+
+          <p className="text-gris text-sm leading-relaxed">
+            {producto.descripcion}
+          </p>
+
+          {/* Atributos */}
+          {producto.atributos.length > 0 && (
+            <div className="flex flex-col gap-3">
+              {producto.atributos.map((attr) => (
+                <div key={attr.nombre} className="flex gap-4 border-b border-gris/10 pb-3">
+                  <span className="text-sm font-bold text-primary w-36 shrink-0">
+                    {attr.nombre}
+                  </span>
+                  <span className="text-sm text-gris">
+                    {attr.valor}
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          <Link
+            href={`/contactanos?producto=${encodeURIComponent(producto.nombre)}`}
+            className="mt-4 px-10 py-4 bg-primary text-white text-sm tracking-widest uppercase font-bold text-center hover:bg-dorado transition-colors duration-300 w-fit"
+          >
+            Solicitar cotización →
+          </Link>
+
+        </div>
+
+      </div>
+
+      {/* Productos relacionados */}
+      {relacionados.length > 0 && (
+        <div className="flex flex-col gap-6">
+          <div>
+            <h2 className="font-sans font-bold text-2xl text-primary">
+              También te puede interesar
+            </h2>
+            <span className="font-cursiva text-xl text-dorado">
+              productos relacionados
+            </span>
+          </div>
+          <div className="grid grid-cols-4 gap-4">
+            {relacionados.map((p) => (
+              <TarjetaProducto key={p.id} producto={p} />
+            ))}
+          </div>
+        </div>
+      )}
+
+    </div>
+  )
+}
+
+import {TarjetaCategoria} from "@/components/productos/TarjetaCategoria"
+import { saleorFetch } from "@/lib/saleor/client"
+import { GET_CATEGORIAS } from "@/lib/saleor/queries/categorias"
+
+export default async function GridCategorias() {
+  const data = await saleorFetch(GET_CATEGORIAS)
+
+  console.log(data)
+  const categorias = data?.data?.categories?.edges ?? []
+  console.log(categorias)
+  return (
+    <section className="py-16 px-8 bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-3 gap-4">
+          {categorias.map((cat) => (
+            <TarjetaCategoria
+              key={cat.node.id}
+              nombre={cat.node.name}
+              imagen={cat.node.backgroundImage}
+              href={`/catalogo/${cat.node.slug}`}
+              conHover={true}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+"use client"
+
+import { useState } from "react"
+import TarjetaProducto from "./TarjetaProducto"
+import { FaSearch } from "react-icons/fa"
+
+export default function GridProductos({ categoria, subcategoria, productosIniciales = [] }) {
+  const [busqueda, setBusqueda] = useState("")
+  console.log(productosIniciales)
+  const productosFiltrados = productosIniciales
+    .filter((p) => !subcategoria || p.subcategoria === subcategoria)
+    .filter((p) => {
+      const texto = busqueda.toLowerCase()
+      return (
+        p.nombre.toLowerCase().includes(texto) ||
+        p.descripcion?.toLowerCase().includes(texto) ||
+        p.subcategoria?.toLowerCase().includes(texto)
+      )
+    })
+  return (
+    <div className="flex flex-col gap-6">
+
+      <div className="relative">
+        <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gris/50" />
+        <input
+          type="text"
+          placeholder="Buscar por nombre, descripción o subcategoría..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          className="w-full pl-10 pr-4 py-3 border border-gris/20 text-sm text-primary placeholder:text-gris/50 focus:outline-none focus:border-dorado transition-colors duration-200"
+        />
+      </div>
+
+      <p className="text-sm text-gris">
+        Mostrando {productosFiltrados.length} resultados
+      </p>
+
+      <div className="grid grid-cols-3 gap-4">
+        {productosFiltrados.map((producto) => (
+          <TarjetaProducto
+            key={producto.id}
+            producto={producto}
+          />
+        ))}
+      </div>
+
+    </div>
+  )
+}
+
+"use client"
+
+import { useState } from "react"
+import SidebarCategorias from "./SidebarCategorias"
+import GridProductos from "./GridProductos"
+
+export function PaginaCategoriaCliente({ categoria }) {
+  const [subcategoriaActiva, setSubcategoriaActiva] = useState(null)
+
+  return (
+    <section className="max-w-7xl mx-auto px-8 py-12 flex gap-12">
+      <SidebarCategorias
+        categoriaActiva={categoria}
+        onSubcategoria={setSubcategoriaActiva}
+        subcategoriaActiva={subcategoriaActiva}
+      />
+      <div className="flex-1 flex flex-col gap-6">
+        <GridProductos subcategoria={subcategoriaActiva} />
+      </div>
+    </section>
+  )
+}
+
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { FaChevronDown, FaChevronUp } from "react-icons/fa"
+
+
+export default function SidebarCategorias({ categoriaActiva, subcategoriaActiva, categorias}) {
+  const [abierta, setAbierta] = useState(categoriaActiva)
+  const router = useRouter()
+  console.log(categorias)
+  return (
+    <aside className="w-64 shrink-0">
+      <div className="sticky top-24">
+
+        <div className="mb-6">
+          <h2 className="font-sans font-bold text-lg text-primary">Categorías</h2>
+          <span className="font-cursiva text-lg text-dorado">de productos</span>
+        </div>
+
+        <ul className="flex flex-col gap-1">
+          {categorias.map((cat) => (
+            <li key={cat.id}>
+
+              <Link
+                href={`/catalogo/${cat.slug}`}
+                onClick={() => setAbierta(abierta === cat.slug ? null : cat.slug)}
+                className="w-full flex items-center justify-between py-2 text-sm font-bold tracking-wide text-primary hover:text-dorado transition-colors duration-200"
+              >
+                {cat.titulo}
+                {abierta === cat.slug ? <FaChevronUp size={10} /> : <FaChevronDown size={10} />}
+              </Link>
+
+              <div className={`overflow-hidden transition-all duration-300 ${abierta === cat.slug ? "max-h-96" : "max-h-0"}`}>
+                <ul className="flex flex-col gap-1 pl-3 pb-2 border-l border-dorado/30">
+                  {cat.links.map((sub) => (
+                    <li key={sub.slug}>
+                      <Link
+                        href={`${sub.href}`}
+                        prefetch={false}
+                        className={`text-sm py-1 block transition-colors duration-200 ${
+                          subcategoriaActiva === sub.slug
+                            ? "text-dorado font-bold"
+                            : "text-gris hover:text-dorado"
+                        }`}
+                      >
+                        {sub.nombre}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </li>
+          ))}
+        </ul>
+
+      </div>
+    </aside>
+  )
+}
+
+import Link from "next/link"
+import Image from "next/image"
+
+export  function TarjetaCategoria({ nombre, imagen, href }) {
+  return (
+    <Link href={href} className="relative h-64 overflow-hidden group">
+
+      <Image
+        src={imagen}
+        alt={nombre}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-110"
+      />
+
+      {/* Gradiente base — más opaco */}
+      <div className="absolute inset-0 bg-primary/70 group-hover:bg-primary/50 transition-colors duration-300" />
+
+      {/* Nombre centrado — más grande */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <span className="font-cursiva text-3xl text-white text-center px-4">
+          {nombre}
+        </span>
+      </div>
+
+      {/* Panel hover slide up */}
+      <div className="absolute inset-x-0 bottom-0 bg-primary/90 py-6 px-4 flex flex-col gap-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
+        <span className="text-white font-bold text-lg tracking-widest uppercase">
+          {nombre}
+        </span>
+        <span className="text-dorado text-sm tracking-widest uppercase">
+          Ver productos →
+        </span>
+      </div>
+
+    </Link>
+  )
+}
+
+import Link from "next/link"
+import Image from "next/image"
+
+export  function TarjetaCategoria({ nombre, imagen, href }) {
+  return (
+    <Link href={href} className="relative h-64 overflow-hidden group">
+
+      <Image
+        src={imagen}
+        alt={nombre}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-110"
+      />
+
+      {/* Gradiente base — más opaco */}
+      <div className="absolute inset-0 bg-primary/70 group-hover:bg-primary/50 transition-colors duration-300" />
+
+      {/* Nombre centrado — más grande */}
+      <div className="absolute inset-0 flex items-center justify-center z-10">
+        <span className="font-cursiva text-3xl text-white text-center px-4">
+          {nombre}
+        </span>
+      </div>
+
+      {/* Panel hover slide up */}
+      <div className="absolute inset-x-0 bottom-0 bg-primary/90 py-6 px-4 flex flex-col gap-2 translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
+        <span className="text-white font-bold text-lg tracking-widest uppercase">
+          {nombre}
+        </span>
+        <span className="text-dorado text-sm tracking-widest uppercase">
+          Ver productos →
+        </span>
+      </div>
+
+    </Link>
+  )
+}
