@@ -19,7 +19,7 @@ export default function Footer() {
         {/* LINKS */}
         <ul className="flex flex-col md:flex-row items-center gap-4 md:gap-10 text-white">
           <li><Link href="/" className={linkClase}>Inicio</Link></li>
-          <li><Link href="/productos" className={linkClase}>Productos</Link></li>
+          <li><Link href="/catalogo" className={linkClase}>Productos</Link></li>
           <li><Link href="/contactanos" className={linkClase}>Contáctanos</Link></li>
           <li><Link href="/nosotros" className={linkClase}>Nosotros</Link></li>
         </ul>
