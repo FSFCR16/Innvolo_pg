@@ -184,6 +184,21 @@ Claude debe primero **leer el código del visor** para ver qué valores actuales
 
 ## 📝 Cambios realizados
 
+### 2026-07-06 — Fix modelos 3D en producción: servir `.glb` desde Vercel + URL relativa 🟡
+- **Problema:** en prod el visor fallaba ("This page couldn't load"). El `.glb` se pedía a `http://localhost:3000/modelos/X.glb` (valor de `model_3d_url` en Woo, apunta a la PC de dev) y además los `.glb` estaban **gitignored** (no se desplegaban a Vercel).
+- **Fix (sin tocar la DB de Woo):**
+  - `queries/productos.js`: nueva `normalizarModelUrl()` convierte la URL absoluta a localhost en **ruta relativa** (`/modelos/X.glb`) → resuelve contra el dominio actual (localhost en dev, `*.vercel.app` en prod).
+  - `.gitignore` (my-app): se quitó la exclusión `/public/modelos/*.glb`.
+  - Se versionaron **29 `.glb` optimizados (~69 MB)** para que Vercel los sirva desde `/public/modelos/`.
+- **Sin tocar:** DB de Woo, `.glb` originales de `Downloads/INNVOLO/3D` (regla #2 intacta — se commitearon las copias ya optimizadas). **Rollback:** `git revert` del commit + restaurar línea en `.gitignore`.
+- **Pendiente:** productos sin modelo propio (Mochila 280, Vaso 245, Delantal 193) siguen sin `.glb`. Si el repo crece mucho a futuro → migrar a Vercel Blob/CDN (opción B, requiere escribir `model_3d_url` en Woo = 🔴).
+
+### 2026-07-06 — Fix deploy Vercel: build con Webpack (ENOENT `routes-manifest-deterministic.json`) 🟡
+- **Problema:** el deploy en Vercel fallaba con `ENOENT ... /vercel/path0/.next/routes-manifest-deterministic.json` **pese a** que `next build` reportaba `✓ Build Completed`. Ese archivo NO lo genera Next (confirmado: no aparece en `node_modules/next` ni en un `next build` local) — lo produce el adaptador de Vercel al finalizar. El build corría con **Turbopack** (`▲ Next.js 16.2.1 (Turbopack)`), que no emite lo que el adaptador espera. Root Directory (`FrontEnd/my-app`) y el toggle "include files outside root" ya estaban correctos, así que no era eso.
+- **Fix:** `FrontEnd/my-app/package.json` → `"build": "next build --webpack"` (modo estable). `dev` sigue con Turbopack. Validado local: compila limpio, 10/10 páginas, misma tabla de rutas.
+- **Sin tocar:** Woo, queries, `.glb`, estilos, DB. **Rollback:** `git checkout package.json`.
+- **Nota Woo:** los `[fetchWoo] falló ... fetch failed` del log son esperados (Woo es local `https://innvolo.local`, inalcanzable desde Vercel). Para poblar el catálogo en prod se levantó **ngrok** (`ngrok http 80 --host-header=innvolo.local`) y se apunta `WC_BASE_URL` en las env vars de Vercel a la URL pública de ngrok. Requiere PC + LocalWP + ngrok encendidos (rutas de catálogo son `ƒ` dinámicas → consultan Woo en cada request). Solución real de prod = mover WP a hosting público.
+
 ### 2026-07-06 — Fix build Vercel: `useSearchParams` sin Suspense 🟡
 - **Problema:** el build de Vercel fallaba al prerenderizar `/contactanos` — `useSearchParams() should be wrapped in a suspense boundary`. `FormularioCotizacion.js` usa `useSearchParams()` (lee `?producto` y `?asunto`) y en Next 16 eso obliga a un `<Suspense>` en páginas estáticas.
 - **Fix:** `src/components/home/FormularioCotizacion.js` — el `export default` ahora es un wrapper que envuelve la lógica (renombrada a `FormularioCotizacionInner`) en `<Suspense fallback={null}>`. Arregla las 2 páginas que lo usan (`/contactanos` y home) y cualquier uso futuro. Import de `Suspense` añadido.
