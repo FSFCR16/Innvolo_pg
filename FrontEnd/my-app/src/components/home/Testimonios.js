@@ -18,17 +18,17 @@ const testimonios = [
 
 export default function Testimonios() {
   return (
-    <section className="py-20 px-6 md:px-8 bg-primary">
-      <div className="max-w-7xl mx-auto flex flex-col gap-12">
+    <section className="py-14 md:py-20 px-6 md:px-8 bg-primary">
+      <div className="max-w-7xl mx-auto flex flex-col gap-10 md:gap-12">
 
         {/* TÍTULO */}
-        <div className="w-full lg:w-[35%] mx-auto text-center lg:text-left">
-          <h2 className="font-sans font-bold text-3xl md:text-3xl lg:text-4xl text-white block">
-            Testimonios que
-          </h2>
-          <span className="font-cursiva text-3xl md:text-3xl lg:text-4xl text-dorado block lg:text-right">
-            respaldan nuestro trabajo
+        <div className="flex flex-col items-center text-center gap-2.5 max-w-xl mx-auto">
+          <span className="text-[11px] font-bold tracking-[0.24em] uppercase text-dorado">
+            Testimonios
           </span>
+          <h2 className="font-titulo font-semibold text-[1.9rem] md:text-[2.5rem] leading-tight text-white">
+            Lo que dicen nuestros clientes
+          </h2>
         </div>
 
         {/* GRID RESPONSIVE (vertical) */}

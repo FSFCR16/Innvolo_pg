@@ -12,17 +12,17 @@ const categorias = [
 
 export default function CategoriasDestacadas() {
   return (
-    <section className="py-20 px-6 md:px-8 bg-white">
-      <div className="max-w-7xl mx-auto flex flex-col gap-12">
+    <section className="py-14 md:py-20 px-6 md:px-8 bg-white">
+      <div className="max-w-7xl mx-auto flex flex-col gap-10 md:gap-12">
 
         {/* TÍTULO */}
-        <div className="w-full lg:w-[20%] mx-auto text-center lg:text-left">
-          <h2 className="font-sans font-bold text-3xl md:text-3xl lg:text-4xl text-primary block">
-            Productos
-          </h2>
-          <span className="font-cursiva text-3xl md:text-3xl lg:text-4xl text-dorado block lg:text-right">
-            con calidad
+        <div className="flex flex-col items-center text-center gap-2.5 max-w-xl mx-auto">
+          <span className="text-[11px] font-bold tracking-[0.24em] uppercase text-dorado">
+            Catálogo
           </span>
+          <h2 className="font-titulo font-semibold text-[1.9rem] md:text-[2.5rem] leading-tight text-primary">
+            Productos con calidad
+          </h2>
         </div>
 
         {/* 📱 MOBILE (solo mobile) */}
@@ -41,20 +41,15 @@ export default function CategoriasDestacadas() {
           ))}
         </div>
 
-        {/* 💻 DESKTOP (solo desktop) */}
-        <div className="hidden md:grid grid-cols-3 grid-rows-2 gap-2">
-          {categorias.map((cat, index) => (
-            <div
+        {/* 💻 DESKTOP (grid uniforme 3×2, balanceado) */}
+        <div className="hidden md:grid grid-cols-3 gap-3">
+          {categorias.map((cat) => (
+            <TarjetaCategoria
               key={cat.nombre}
-              className={index === 0 ? "col-span-2 row-span-2" : ""}
-            >
-              <TarjetaCategoria
-                nombre={cat.nombre}
-                imagen={cat.imagen}
-                href={cat.href}
-                featured={index === 0}
-              />
-            </div>
+              nombre={cat.nombre}
+              imagen={cat.imagen}
+              href={cat.href}
+            />
           ))}
         </div>
 
