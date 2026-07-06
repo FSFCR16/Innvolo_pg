@@ -1,8 +1,16 @@
 import { Resend } from "resend"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export async function POST(request) {
+  const apiKey = process.env.RESEND_API_KEY
+  if (!apiKey) {
+    console.error("RESEND_API_KEY no está configurada")
+    return Response.json(
+      { ok: false, mensaje: "Servicio de correo no configurado" },
+      { status: 500 }
+    )
+  }
+  const resend = new Resend(apiKey)
+
   try {
     const { nombre, correo, celular, empresa, producto } = await request.json()
 
