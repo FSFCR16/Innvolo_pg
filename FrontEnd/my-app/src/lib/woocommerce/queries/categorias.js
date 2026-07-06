@@ -1,4 +1,5 @@
 import { fetchWoo } from "../woo"
+import { normalizarWpUrl } from "../urls"
 
 export async function getCategorias() {
   const cats = await fetchWoo('/products/categories', { parent: 0, per_page: 20 })
@@ -13,7 +14,7 @@ export async function getCategorias() {
         id: cat.id,
         name: cat.name,
         slug: cat.slug,
-        image: { url: cat.image?.src || null },
+        image: { url: normalizarWpUrl(cat.image?.src) || null },
         children: (Array.isArray(children) ? children : []).map((c) => ({
           id: c.id,
           name: c.name,
@@ -41,7 +42,7 @@ export async function getCategoria(slug) {
     id: cat.id,
     name: cat.name,
     slug: cat.slug,
-    image: { url: cat.image?.src || null },
+    image: { url: normalizarWpUrl(cat.image?.src) || null },
     children: (Array.isArray(children) ? children : []).map((c) => ({
       id: c.id,
       name: c.name,
@@ -51,7 +52,7 @@ export async function getCategoria(slug) {
       id: p.id,
       name: p.name,
       slug: p.slug,
-      thumbnail: { url: p.images[0]?.src || null },
+      thumbnail: { url: normalizarWpUrl(p.images[0]?.src) || null },
     })),
   }
 }

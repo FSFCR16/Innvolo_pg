@@ -184,6 +184,14 @@ Claude debe primero **leer el código del visor** para ver qué valores actuales
 
 ## 📝 Cambios realizados
 
+### 2026-07-06 — Subida de imágenes del catálogo a WooCommerce (36 productos) 🔴
+- **Qué:** se subieron las 36 imágenes de `Downloads/INNVOLO/IMAGENES CATALOGO/_staged` (`NN-slug.png`) a Woo, 1 por producto. Resultado: **36/36 productos con imagen, 0 fallos**.
+- **Contexto:** Woo ahora tiene **36 productos = 1:1 con el Excel** (un chat previo separó las fusiones: Camisa 354, Camiseta 371, Polo 13, Overol 388, Bata 215, Botella 405). Descripción/materiales/colores/técnica/`precio_20/50/100/500` **ya estaban** poblados; **solo faltaban las imágenes** (todos tenían 0).
+- **Cómo (por el bloqueo SSRF de WP):** `wp/v2/media` rechaza las claves WC (401) y `download_url()` bloquea `localhost`/IP privada. Solución: copiar las imágenes a `Local Sites/innvolo/app/public/_staged_import/` → servidas por WP → `PUT /wc/v3/products/{id}` con `images:[{src: https://<ngrok>/_staged_import/NN.png}]` → WC las importa a la media library (`/wp-content/uploads/2026/07/...`). Carpeta temporal **borrada** tras la importación.
+- **Mapeo:** match automático por nombre + 2 correcciones manuales (`05-gorra-dril`→id 30, `19-vaso-termico-botilito`→id 232). Verificado 36→36 IDs distintos.
+- **Backup:** `scratchpad/woo_img_backup.json` (estado previo: todos con 0 imágenes). **Rollback:** vaciar `images` de los 36 ids.
+- ⚠️ **Pendiente:** las URLs de imagen son `https://innvolo.local/...` → rompen en Vercel. Se reescribirá el host al hacer la product page dinámica (mismo patrón que `normalizarModelUrl`).
+
 ### 2026-07-06 — Fix modelos 3D en producción: servir `.glb` desde Vercel + URL relativa 🟡
 - **Problema:** en prod el visor fallaba ("This page couldn't load"). El `.glb` se pedía a `http://localhost:3000/modelos/X.glb` (valor de `model_3d_url` en Woo, apunta a la PC de dev) y además los `.glb` estaban **gitignored** (no se desplegaban a Vercel).
 - **Fix (sin tocar la DB de Woo):**

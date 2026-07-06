@@ -25,13 +25,18 @@ const ICONOS_BADGE = { envio: FiTruck, entrega: FiClock, calidad: FiShield }
 
 export default function DetalleProductoCliente({ producto, relacionados }) {
 
-  // Estado de cotización (cantidad + técnica) — valores quemados (Fase 1)
-  const [cantidadIdx, setCantidadIdx] = useState(TRAMO_DEFAULT)
+  // Tramos de precio: reales de Woo (precio_20/50/100/500) si existen; si no, fallback quemado
+  const tramos = producto?.tramosPrecio?.length ? producto.tramosPrecio : TRAMOS_PRECIO
+
+  // Estado de cotización (cantidad + técnica)
+  const [cantidadIdx, setCantidadIdx] = useState(Math.min(TRAMO_DEFAULT, tramos.length - 1))
   const [tecnicaIdx, setTecnicaIdx] = useState(0)
 
-  // Colores disponibles: reales de Woo si existen, si no la paleta base
+  // Colores: variantes reales de Woo → colores del Excel → paleta base
   const colores = producto?.coloresVariantes?.length
     ? producto.coloresVariantes
+    : producto?.coloresDisponibles?.length
+    ? producto.coloresDisponibles
     : COLORES_BASE_DEFAULT
   const [colorIdx, setColorIdx] = useState(0)
 
@@ -41,8 +46,17 @@ export default function DetalleProductoCliente({ producto, relacionados }) {
     </div>
   )
 
-  const tramo = TRAMOS_PRECIO[cantidadIdx]
+  const tramo = tramos[cantidadIdx]
   const tecnica = TECNICAS[tecnicaIdx]
+
+  // Ficha técnica dinámica desde Woo (con fallback a lo quemado)
+  const fichaDinamica = [
+    producto.materiales && { label: "Material", valor: producto.materiales },
+    colores.length && { label: "Colores", valor: colores.join(" · ") },
+    producto.tecnicaRecomendada && { label: "Técnica recomendada", valor: producto.tecnicaRecomendada },
+    tramos.length && { label: "Mínimo", valor: `${tramos[0].label} unidades` },
+  ].filter(Boolean)
+  const fichaTecnica = fichaDinamica.length ? fichaDinamica : FICHA_TECNICA
   const colorNombre = colores[colorIdx]
   const colorHex = COLORES_HEX[colorNombre] || "#cccccc"
 
@@ -139,7 +153,7 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
           <div>
             <p className="text-[11px] font-bold tracking-[0.12em] text-primary mb-2.5">CANTIDAD</p>
             <div className="flex flex-wrap gap-2">
-              {TRAMOS_PRECIO.map((t, i) => (
+              {tramos.map((t, i) => (
                 <button
                   key={t.cantidad}
                   type="button"
@@ -177,6 +191,12 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
                 </button>
               ))}
             </div>
+            {producto.tecnicaRecomendada && (
+              <p className="text-[12px] text-gris mt-2">
+                Recomendada para este producto:{" "}
+                <span className="font-semibold text-primary">{producto.tecnicaRecomendada}</span>
+              </p>
+            )}
           </div>
 
           {/* PRECIO (reacciona a la cantidad) */}
@@ -235,7 +255,7 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
         <div className="rounded-2xl border border-black/10 px-6 py-5">
           <p className="text-[15px] font-semibold text-primary mb-4">Ficha técnica</p>
           <div className="grid grid-cols-2 gap-x-8 gap-y-4">
-            {FICHA_TECNICA.map((f) => (
+            {fichaTecnica.map((f) => (
               <div key={f.label} className="flex flex-col">
                 <span className="text-[11px] text-gris">{f.label}</span>
                 <span className="text-sm font-semibold text-primary mt-0.5">{f.valor}</span>

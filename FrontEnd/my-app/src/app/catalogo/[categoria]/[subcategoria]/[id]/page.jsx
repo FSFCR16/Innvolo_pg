@@ -8,6 +8,16 @@ import { Breadcrumbs } from "@/components/ui/breadcrumbs"
 // forzamos fetch en cada visita en vez de depender de una regeneración cacheada.
 export const dynamic = "force-dynamic"
 
+// "Negro, Blanco, Azul (otros bajo consulta)" -> ["Negro","Blanco","Azul"]
+function parsearColores(str) {
+  if (!str) return []
+  return str
+    .replace(/\([^)]*\)/g, "")      // quita paréntesis "(otros bajo consulta)"
+    .split(",")
+    .map((c) => c.trim())
+    .filter(Boolean)
+}
+
 export async function generateMetadata({ params }) {
   const { id } = await params
   const producto = await getProducto(id)
@@ -42,6 +52,11 @@ export default async function PaginaProducto({ params }) {
         tipo3d: productoRaw.tipo3d,
         customizationZones: productoRaw.customizationZones,
         coloresVariantes: productoRaw.coloresVariantes ?? [],
+        // Datos reales de Woo (Excel) para la ficha dinámica
+        tramosPrecio: productoRaw.tramosPrecio ?? null,
+        materiales: productoRaw.materiales ?? null,
+        tecnicaRecomendada: productoRaw.tecnicaRecomendada ?? null,
+        coloresDisponibles: parsearColores(productoRaw.coloresDisponibles),
       }
     : null
 
