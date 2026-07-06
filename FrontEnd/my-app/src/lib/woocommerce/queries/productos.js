@@ -1,5 +1,11 @@
 import { fetchWoo } from '../woo'
-import { normalizarWpUrl } from '../urls'
+
+// Imagen del producto servida desde Vercel (public/productos/<id>.webp).
+// Antes salía de WordPress local (innvolo.local/ngrok) y el navegador pegaba a
+// la PC en cada visita. Las 36 .webp se generan con scratchpad/optimizar_imagenes.mjs.
+function imagenProductoLocal(id) {
+  return `/productos/${id}.webp`
+}
 
 // El valor guardado en Woo es una URL absoluta a localhost
 // (http://localhost:3000/modelos/x.glb). La normalizamos a ruta relativa
@@ -75,8 +81,8 @@ export async function getProducto(id) {
     name: p.name,
     slug: p.slug,
     description: p.description,
-    images: (p.images || []).map((img) => ({ url: normalizarWpUrl(img.src) })),
-    thumbnail: { url: normalizarWpUrl(p.images?.[0]?.src) || null },
+    images: [{ url: imagenProductoLocal(p.id) }],
+    thumbnail: { url: imagenProductoLocal(p.id) },
     category: {
       name: p.categories?.[0]?.name || null,
       slug: p.categories?.[0]?.slug || null,
@@ -121,6 +127,6 @@ export async function getProductosRelacionados(categoryId) {
     id: p.id,
     name: p.name,
     slug: p.slug,
-    thumbnail: { url: normalizarWpUrl(p.images[0]?.src) || null },
+    thumbnail: { url: imagenProductoLocal(p.id) },
   }))
 }

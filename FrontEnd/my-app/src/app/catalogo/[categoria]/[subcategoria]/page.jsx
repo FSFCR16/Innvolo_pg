@@ -4,7 +4,9 @@ import { PaginaCategoriaCliente } from "@/components/productos/PaginaCategoriaCl
 import { getCategorias, getCategoria } from "@/lib/woocommerce/queries/categorias"
 import { Breadcrumbs } from "@/components/ui/breadcrumbs"
 
-export const dynamic = "force-dynamic"
+// ISR: la ruta se regenera a lo sumo cada 5 min en vez de pegar a la PC (Woo
+// local/ngrok) en cada visita. Vercel sirve la última versión buena aunque Woo caiga.
+export const revalidate = 300
 
 export async function generateMetadata({ params }) {
   const { categoria, subcategoria } = await params

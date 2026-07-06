@@ -19,6 +19,9 @@ export async function fetchWoo(endpoint, params = {}) {
       agent,
       // Evita que un WooCommerce colgado/inaccesible bloquee el build indefinidamente.
       signal: AbortSignal.timeout(10000),
+      // Cachea la respuesta 5 min: junto con el ISR de las rutas, la PC (Woo local)
+      // recibe como mucho 1 petición por endpoint cada 5 min, no una por visita.
+      next: { revalidate: 300 },
     })
 
     if (!res.ok) {

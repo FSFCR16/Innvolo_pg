@@ -4,9 +4,10 @@ import { getProducto, getProductosRelacionados } from "@/lib/woocommerce/queries
 import { getCategoria } from "@/lib/woocommerce/queries/categorias"
 import { Breadcrumbs } from "@/components/ui/breadcrumbs"
 
-// WooCommerce corre local y se expone por ngrok de forma intermitente:
-// forzamos fetch en cada visita en vez de depender de una regeneración cacheada.
-export const dynamic = "force-dynamic"
+// WooCommerce corre local y se expone por ngrok de forma intermitente. En vez de
+// pegar a la PC en cada visita (la saturaba y devolvía "0 productos"), usamos ISR:
+// la ruta se regenera a lo sumo cada 5 min y Vercel sirve la última versión buena.
+export const revalidate = 300
 
 // "Negro, Blanco, Azul (otros bajo consulta)" -> ["Negro","Blanco","Azul"]
 function parsearColores(str) {

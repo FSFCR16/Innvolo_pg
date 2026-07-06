@@ -1,5 +1,23 @@
 import { fetchWoo } from "../woo"
-import { normalizarWpUrl } from "../urls"
+
+// Imagen de categoría servida desde Vercel (public/categorias) — antes salía de
+// WordPress local (innvolo.local/ngrok) y el navegador pegaba a la PC en cada
+// visita. Se mapea por nombre porque las 6 top-level son estables.
+function imagenCategoriaLocal(name) {
+  const n = (name || "").toLowerCase()
+  if (n.includes("ropa")) return "/categorias/ropa.jpeg"
+  if (n.includes("dotaci") || n.includes("indumentaria")) return "/categorias/dotacion.jpeg"
+  if (n.includes("recipiente")) return "/categorias/recipientes.jpeg"
+  if (n.includes("oficina") || n.includes("promocional")) return "/categorias/promocionales.jpeg"
+  if (n.includes("textil") || n.includes("bolsa")) return "/categorias/textiles.jpeg"
+  if (n.includes("mascota")) return "/categorias/mascotas.jpeg"
+  return "/categorias/ropa.jpeg"
+}
+
+// Imagen de producto servida desde Vercel (public/productos/<id>.webp).
+function imagenProductoLocal(id) {
+  return `/productos/${id}.webp`
+}
 
 export async function getCategorias() {
   const cats = await fetchWoo('/products/categories', { parent: 0, per_page: 20 })
@@ -14,7 +32,7 @@ export async function getCategorias() {
         id: cat.id,
         name: cat.name,
         slug: cat.slug,
-        image: { url: normalizarWpUrl(cat.image?.src) || null },
+        image: { url: imagenCategoriaLocal(cat.name) },
         children: (Array.isArray(children) ? children : []).map((c) => ({
           id: c.id,
           name: c.name,
@@ -42,7 +60,7 @@ export async function getCategoria(slug) {
     id: cat.id,
     name: cat.name,
     slug: cat.slug,
-    image: { url: normalizarWpUrl(cat.image?.src) || null },
+    image: { url: imagenCategoriaLocal(cat.name) },
     children: (Array.isArray(children) ? children : []).map((c) => ({
       id: c.id,
       name: c.name,
@@ -52,7 +70,7 @@ export async function getCategoria(slug) {
       id: p.id,
       name: p.name,
       slug: p.slug,
-      thumbnail: { url: normalizarWpUrl(p.images[0]?.src) || null },
+      thumbnail: { url: imagenProductoLocal(p.id) },
     })),
   }
 }
