@@ -1,5 +1,18 @@
 import { fetchWoo } from '../woo'
 
+// El valor guardado en Woo es una URL absoluta a localhost
+// (http://localhost:3000/modelos/x.glb). La normalizamos a ruta relativa
+// (/modelos/x.glb) para que resuelva contra el dominio que sirve la página
+// (localhost en dev, *.vercel.app en prod) sin hardcodear el host.
+function normalizarModelUrl(url) {
+  if (!url) return null
+  try {
+    return new URL(url).pathname
+  } catch {
+    return url // ya era relativa
+  }
+}
+
 export async function getProducto(id) {
   const [p, variationsRaw] = await Promise.all([
     fetchWoo(`/products/${id}`),
@@ -13,8 +26,9 @@ export async function getProducto(id) {
 
   const metaData = Array.isArray(p.meta_data) ? p.meta_data : []
 
-  const model3dUrl =
+  const model3dUrl = normalizarModelUrl(
     metaData.find((m) => m.key === 'model_3d_url')?.value || null
+  )
 
   const tipo3d =
     metaData.find((m) => m.key === 'tipo_3d')?.value || 'torso'

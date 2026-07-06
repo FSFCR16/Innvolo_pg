@@ -36,9 +36,6 @@ yarn-error.log*
 # vercel
 .vercel
 
-# modelos 3D (.glb pesados, ~28MB c/u — servidos localmente, no versionar)
-/public/modelos/*.glb
-
 # typescript
 *.tsbuildinfo
 next-env.d.ts
