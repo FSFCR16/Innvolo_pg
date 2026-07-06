@@ -184,6 +184,12 @@ Claude debe primero **leer el código del visor** para ver qué valores actuales
 
 ## 📝 Cambios realizados
 
+### 2026-07-06 — Fix build Vercel: `useSearchParams` sin Suspense 🟡
+- **Problema:** el build de Vercel fallaba al prerenderizar `/contactanos` — `useSearchParams() should be wrapped in a suspense boundary`. `FormularioCotizacion.js` usa `useSearchParams()` (lee `?producto` y `?asunto`) y en Next 16 eso obliga a un `<Suspense>` en páginas estáticas.
+- **Fix:** `src/components/home/FormularioCotizacion.js` — el `export default` ahora es un wrapper que envuelve la lógica (renombrada a `FormularioCotizacionInner`) en `<Suspense fallback={null}>`. Arregla las 2 páginas que lo usan (`/contactanos` y home) y cualquier uso futuro. Import de `Suspense` añadido.
+- **Verificado:** `npm run build` local → `Compiled successfully`, `10/10` páginas, `/contactanos` como ○ estático.
+- **Sin tocar:** Woo, queries, `.glb`, estilos. **Rollback:** `git checkout` de `FormularioCotizacion.js`.
+
 ### 2026-06-12 — Unificación de diseño: catálogo / categoría / subcategoría + zoom 3D 🟡
 - **Zoom 3D de inicio:** `VisorProducto3D.jsx` ahora usa `<Bounds fit clip observe margin={0.85}>` (en vez de `<Center>`) → encuadra el modelo lo más grande posible al cargar, adaptándose al tamaño de cada `.glb`. `OrbitControls` con `makeDefault`, `minDistance 1.2` / `maxDistance 6`.
 - **Banda de marca con variantes:** `BandaMarcaProducto.js` admite `variante` = `simetrico | confianza | cinta | atmosferico | premium`. **Default = `premium`** (combinación elegida B+D): fondo navy con degradado + grano SVG + halo dorado, eyebrow a la izq + 3 sellos de confianza a la der (ocultos en móvil). Keyframes `marquee` en `globals.css`. Página temporal de comparación: `src/app/preview-banda/page.jsx` (BORRAR cuando se confirme).

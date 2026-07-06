@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { Input } from "@/components/ui/Input"
 import { cotizacionSchema } from "@/lib/saleor/validations/cotizacion"
@@ -12,7 +12,15 @@ const campos = [
   { id: "empresa", label: "Empresa", type: "text", placeholder: "Nombre de tu empresa" },
 ]
 
-export default function FormularioCotizacion({ sinTitulo = false }) {
+export default function FormularioCotizacion(props) {
+  return (
+    <Suspense fallback={null}>
+      <FormularioCotizacionInner {...props} />
+    </Suspense>
+  )
+}
+
+function FormularioCotizacionInner({ sinTitulo = false }) {
   const searchParams = useSearchParams()
   const productoParam = searchParams.get("producto")
   const asuntoParam = searchParams.get("asunto")
