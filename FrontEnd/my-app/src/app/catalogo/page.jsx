@@ -2,6 +2,10 @@ import { BandaMarcaProducto } from "@/components/layout/BandaMarcaProducto"
 import { EncabezadoCatalogo } from "@/components/productos/EncabezadoCatalogo"
 import GridCategorias from "@/components/productos/GridCategorias"
 
+// WooCommerce corre local y se expone por ngrok de forma intermitente:
+// forzamos fetch en cada visita en vez de depender de una regeneración cacheada.
+export const dynamic = "force-dynamic"
+
 export const metadata = {
   title: "Catalogo | INNVOLO",
   description:

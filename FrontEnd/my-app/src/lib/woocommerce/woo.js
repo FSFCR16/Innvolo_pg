@@ -17,14 +17,20 @@ export async function fetchWoo(endpoint, params = {}) {
         Authorization: `Basic ${token}`,
       },
       agent,
+      // Evita que un WooCommerce colgado/inaccesible bloquee el build indefinidamente.
+      signal: AbortSignal.timeout(10000),
     })
 
     if (!res.ok) {
-      throw new Error(`WooCommerce API error ${res.status} en ${endpoint}`)
+      console.warn(`[fetchWoo] respuesta no-ok ${res.status} en ${endpoint}`)
+      return null
     }
 
     return await res.json()
   } catch (error) {
-    throw new Error(`fetchWoo falló en ${endpoint}: ${error.message}`)
+    // No lanzamos: durante el build (p. ej. Vercel) WooCommerce local no es
+    // accesible. Devolvemos null y cada query decide su fallback seguro.
+    console.warn(`[fetchWoo] falló en ${endpoint}: ${error.message}`)
+    return null
   }
 }

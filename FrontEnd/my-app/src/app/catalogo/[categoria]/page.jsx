@@ -4,6 +4,10 @@ import { PaginaCategoriaCliente } from "@/components/productos/PaginaCategoriaCl
 import { getCategorias, getCategoria } from "@/lib/woocommerce/queries/categorias"
 import { Breadcrumbs } from "@/components/ui/breadcrumbs"
 
+// WooCommerce corre local y se expone por ngrok de forma intermitente:
+// forzamos fetch en cada visita en vez de depender de una regeneración cacheada.
+export const dynamic = "force-dynamic"
+
 export async function generateMetadata({ params }) {
   const { categoria } = await params
   return {

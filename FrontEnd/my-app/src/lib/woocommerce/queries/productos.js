@@ -1,19 +1,26 @@
 import { fetchWoo } from '../woo'
 
 export async function getProducto(id) {
-  const [p, variations] = await Promise.all([
+  const [p, variationsRaw] = await Promise.all([
     fetchWoo(`/products/${id}`),
     fetchWoo(`/products/${id}/variations`),
   ])
 
+  // Fallback seguro: si Woo no responde, el consumidor ya maneja `null`.
+  if (!p || !p.id) return null
+
+  const variations = Array.isArray(variationsRaw) ? variationsRaw : []
+
+  const metaData = Array.isArray(p.meta_data) ? p.meta_data : []
+
   const model3dUrl =
-    p.meta_data.find((m) => m.key === 'model_3d_url')?.value || null
+    metaData.find((m) => m.key === 'model_3d_url')?.value || null
 
   const tipo3d =
-    p.meta_data.find((m) => m.key === 'tipo_3d')?.value || 'torso'
+    metaData.find((m) => m.key === 'tipo_3d')?.value || 'torso'
 
   const customizationZones = JSON.parse(
-    p.meta_data.find((m) => m.key === 'customization_zones')?.value || '[]'
+    metaData.find((m) => m.key === 'customization_zones')?.value || '[]'
   )
 
   // Extraer colores únicos de las variantes
@@ -32,19 +39,19 @@ export async function getProducto(id) {
     name: p.name,
     slug: p.slug,
     description: p.description,
-    images: p.images.map((img) => ({ url: img.src })),
-    thumbnail: { url: p.images[0]?.src || null },
+    images: (p.images || []).map((img) => ({ url: img.src })),
+    thumbnail: { url: p.images?.[0]?.src || null },
     category: {
-      name: p.categories[0]?.name || null,
-      slug: p.categories[0]?.slug || null,
+      name: p.categories?.[0]?.name || null,
+      slug: p.categories?.[0]?.slug || null,
       parent: {
-        name: p.categories[1]?.name || null,
-        slug: p.categories[1]?.slug || null,
+        name: p.categories?.[1]?.name || null,
+        slug: p.categories?.[1]?.slug || null,
       },
     },
-    attributes: p.attributes.map((a) => ({
+    attributes: (p.attributes || []).map((a) => ({
       attribute: { name: a.name, slug: a.slug },
-      values: a.options.map((o) => ({ name: o })),
+      values: (a.options || []).map((o) => ({ name: o })),
     })),
     variants: variations.map((v) => ({
       id: v.id,
@@ -66,6 +73,9 @@ export async function getProductosRelacionados(categoryId) {
     category: categoryId,
     per_page: 4,
   })
+
+  // Fallback seguro: sin datos ⇒ lista vacía (el consumidor hace .filter()).
+  if (!Array.isArray(products)) return []
 
   return products.map((p) => ({
     id: p.id,
