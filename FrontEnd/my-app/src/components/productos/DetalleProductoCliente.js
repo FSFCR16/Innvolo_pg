@@ -16,7 +16,6 @@ import {
   PROCESO_TEXTO,
   ENVIOS_TEXTO,
   COLORES_HEX,
-  COLORES_BASE_DEFAULT,
   formatoCOP,
 } from "@/lib/config/cotizacion"
 
@@ -32,12 +31,11 @@ export default function DetalleProductoCliente({ producto, relacionados }) {
   const [cantidadIdx, setCantidadIdx] = useState(Math.min(TRAMO_DEFAULT, tramos.length - 1))
   const [tecnicaIdx, setTecnicaIdx] = useState(0)
 
-  // Colores: variantes reales de Woo → colores del Excel → paleta base
-  const colores = producto?.coloresVariantes?.length
-    ? producto.coloresVariantes
-    : producto?.coloresDisponibles?.length
-    ? producto.coloresDisponibles
-    : COLORES_BASE_DEFAULT
+  // Colores REALES del Excel (colores_disponibles). Se ignoran las variantes de
+  // Woo (se crearon con un set uniforme para todos). Se filtran tokens que no son
+  // un color con hex conocido (p.ej. "a todo color según diseño").
+  const colores = (producto?.coloresDisponibles || []).filter((c) => COLORES_HEX[c])
+  const hayColores = colores.length > 0
   const [colorIdx, setColorIdx] = useState(0)
 
   // ¿La galería está en vista 3D? El color solo se elige en 3D (donde se
@@ -61,8 +59,8 @@ export default function DetalleProductoCliente({ producto, relacionados }) {
     tramos.length && { label: "Mínimo", valor: `${tramos[0].label} unidades` },
   ].filter(Boolean)
   const fichaTecnica = fichaDinamica.length ? fichaDinamica : FICHA_TECNICA
-  const colorNombre = colores[colorIdx]
-  const colorHex = COLORES_HEX[colorNombre] || "#cccccc"
+  const colorNombre = hayColores ? colores[colorIdx] : null
+  const colorHex = colorNombre ? (COLORES_HEX[colorNombre] || "#cccccc") : null
 
   // El selector de color solo se habilita en la vista 3D (donde se ve el cambio).
   // En productos sin modelo 3D queda habilitado (el color igual va en la cotización).
@@ -73,8 +71,7 @@ export default function DetalleProductoCliente({ producto, relacionados }) {
 
 *${producto.nombre}*
 Cantidad: ${tramo.label} unidades
-Técnica: ${tecnica}
-Color: ${colorNombre}
+Técnica: ${tecnica}${colorNombre ? `\nColor: ${colorNombre}` : ""}
 Precio estimado: ${formatoCOP(tramo.precio)}/u`
 
   const urlWhatsApp = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensajeWhatsApp)}`
@@ -117,7 +114,8 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
             />
           )}
 
-          {/* COLORES DISPONIBLES */}
+          {/* COLORES DISPONIBLES (solo si el Excel trae colores reales) */}
+          {hayColores && (
           <div>
             <div className="flex items-baseline justify-between mb-2.5">
               <p className="text-[11px] font-bold tracking-[0.12em] text-primary">COLORES DISPONIBLES</p>
@@ -162,6 +160,7 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
               )}
             </p>
           </div>
+          )}
 
           {/* CANTIDAD */}
           <div>

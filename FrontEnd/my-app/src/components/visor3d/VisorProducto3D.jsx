@@ -9,7 +9,7 @@
 // ============================================================
 
 import { Canvas } from "@react-three/fiber"
-import { OrbitControls, useGLTF, Environment, Bounds, Html } from "@react-three/drei"
+import { OrbitControls, useGLTF, Environment, Bounds, Center, Html } from "@react-three/drei"
 import { Suspense, useEffect } from "react"
 import * as THREE from "three"
 
@@ -66,20 +66,30 @@ export default function VisorProducto3D({ modelUrl, color }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 3], fov: 45 }}
+      // dpr [1,2] = render a resolución de pantalla (más nítido, sin bordes serruchados).
+      dpr={[1, 2]}
       // NeutralToneMapping = color fiel de producto (ACESFilmic, el default,
       // aclaraba y desaturaba: por eso el negro se veía gris).
       gl={{ antialias: true, toneMapping: THREE.NeutralToneMapping }}
       style={{ cursor: "grab" }}
     >
-      <ambientLight intensity={0.55} />
-      <directionalLight position={[5, 5, 5]} intensity={1.0} />
-      <directionalLight position={[-5, 3, -5]} intensity={0.4} />
+      {/* Luz difusa alta para que el blanco/claros tengan forma y brillo.
+          No agrisa el negro: el albedo negro no refleja luz difusa; lo que
+          agrisaba era el sheen/reflejo del entorno (ya bajos). */}
+      <ambientLight intensity={0.6} />
+      <directionalLight position={[5, 5, 5]} intensity={1.4} />
+      <directionalLight position={[-5, 3, -5]} intensity={0.55} />
 
       <Suspense fallback={<Html center><span className="text-gris/50 text-xs">Cargando 3D…</span></Html>}>
         {/* Bounds encuadra el modelo lo más grande posible (zoom máx. de inicio),
             adaptándose al tamaño de cada .glb. margin<1 = encuadre apretado. */}
+        {/* Center recoloca la geometría con su centro en el origen: así el
+            modelo gira sobre sí mismo (antes el pivote descentrado lo hacía
+            "irse a la izquierda"). Bounds encuadra; OrbitControls orbita el origen. */}
         <Bounds fit clip observe margin={1.2}>
-          <Modelo url={modelUrl} color={color} />
+          <Center>
+            <Modelo url={modelUrl} color={color} />
+          </Center>
         </Bounds>
         <Environment preset="studio" />
       </Suspense>

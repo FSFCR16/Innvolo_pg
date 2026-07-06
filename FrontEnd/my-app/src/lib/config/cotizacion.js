@@ -77,6 +77,9 @@ export const COLORES_HEX = {
   "Beige":       "#d7c4a3",
   "Vinotinto":   "#8e1d2d",
   "Café":        "#5d4037",
+  "Plateado":    "#c0c0c0",
+  "Morado":      "#8e24aa",
+  "Transparente":"#e5e7eb",
 }
 
 // Paleta por defecto cuando el producto no tiene variantes de color en Woo.
