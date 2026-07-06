@@ -1,4 +1,4 @@
-import { Inter, Playfair_Display, Dancing_Script } from "next/font/google"
+import { Poppins, Cormorant_Garamond } from "next/font/google"
 import "./globals.css"
 import Navbar from "../components/layout/Navbar.js"
 import Footer from "../components/layout/Footer.js"
@@ -6,19 +6,21 @@ import { getCategorias } from "@/lib/woocommerce/queries/categorias"
 import ProgressBar from "@/components/ui/progressBar.js"
 import { Toaster } from "react-hot-toast"
 
-const inter = Inter({
+// Tipografía alineada al Manual de Marca INNVOLO (sustitutas open-source, licencia SIL):
+// Cormorant Garamond ≈ Garalda (serif primaria), Poppins ≈ Now (sans secundaria).
+const poppins = Poppins({
   variable: "--font-sans",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
 })
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   variable: "--font-titulo",
   subsets: ["latin"],
-})
-
-const dancing = Dancing_Script({
-  variable: "--font-cursiva",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
 })
 
 export const metadata = {
@@ -32,7 +34,7 @@ export default async function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${dancing.variable}`}
+      className={`${poppins.variable} ${cormorant.variable}`}
     >
       <body>
         <Navbar categorias={categorias} />

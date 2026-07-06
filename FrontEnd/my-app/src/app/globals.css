@@ -8,9 +8,15 @@
   --color-dorado: #C9A84C;
   --color-gris: #4A4A4A;
 
-  --font-sans: "Inter", sans-serif;
-  --font-titulo: "Playfair Display", serif;
-  --font-cursiva: "Dancing Script", cursive;
+  --font-sans: "Poppins", sans-serif;
+  --font-titulo: "Cormorant Garamond", serif;
+  --font-cursiva: var(--font-titulo);
+}
+
+/* Los acentos (antes Dancing Script) usan la itálica del serif primario,
+   como en el Manual de Marca. */
+.font-cursiva {
+  font-style: italic;
 }
 
 body {
