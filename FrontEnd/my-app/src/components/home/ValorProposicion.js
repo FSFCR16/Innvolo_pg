@@ -26,27 +26,24 @@ const valores = [
 
 export default function ValorProposicion() {
   return (
-    <section className="py-14 md:py-20 px-6 md:px-8 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto flex flex-col items-center gap-10 md:gap-12">
+    <section className="py-16 md:py-20 px-6 md:px-8 bg-[#F6F7F9] overflow-hidden">
+      <div className="max-w-7xl mx-auto flex flex-col items-center gap-10 md:gap-14">
 
         {/* TÍTULO */}
-        <div className="flex flex-col items-center text-center gap-2.5 max-w-xl mx-auto">
+        <div className="flex flex-col items-center text-center gap-3 max-w-xl mx-auto">
           <span className="text-[11px] font-bold tracking-[0.24em] uppercase text-dorado">
             Por qué INNVOLO
           </span>
-          <h2 className="font-titulo font-semibold text-[1.9rem] md:text-[2.5rem] leading-tight text-primary">
+          <h2 className="font-titulo font-semibold text-[2rem] md:text-[2.5rem] leading-tight text-primary">
             Calidad que genera confianza
           </h2>
+          <span className="block h-px w-12 bg-dorado/60 mt-1" />
         </div>
-        {/* 📱 MOBILE (slider premium) */}
-        <div className="flex md:hidden w-full overflow-x-auto gap-6 pb-4 snap-x snap-mandatory">
+
+        {/* 📱 MOBILE (stack vertical — todo visible) */}
+        <div className="flex flex-col gap-4 w-full md:hidden">
           {valores.map((valor) => (
-            <div
-              key={valor.titulo}
-              className="min-w-[85%] snap-center first:ml-2 last:mr-2"
-            >
-              <TarjetaValor {...valor} />
-            </div>
+            <TarjetaValor key={valor.titulo} {...valor} />
           ))}
         </div>
 
