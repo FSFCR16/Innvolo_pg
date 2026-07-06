@@ -73,7 +73,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-primary/10" />
 
       {/* Contenido editorial — pt para no quedar bajo el navbar */}
-      <div className="relative h-full max-w-7xl mx-auto px-6 md:px-8 flex items-center pt-24 md:pt-20">
+      <div className="relative h-full max-w-7xl mx-auto px-6 md:px-8 flex items-center pt-32 md:pt-36">
         <div className="max-w-2xl flex flex-col anim-page">
 
           {/* Eyebrow */}
