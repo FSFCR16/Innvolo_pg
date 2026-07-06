@@ -130,3 +130,21 @@ export async function getProductosRelacionados(categoryId) {
     thumbnail: { url: imagenProductoLocal(p.id) },
   }))
 }
+
+// Todos los productos del catálogo (para la página /catalogo = "todos + filtros").
+// Incluye los slugs de categoría de cada producto para poder armar el enlace
+// /catalogo/<categoria>/<subcategoria>/<id> (el consumidor resuelve padre/hijo).
+export async function getTodosLosProductos() {
+  const products = await fetchWoo('/products', { per_page: 100, orderby: 'title', order: 'asc' })
+
+  // Fallback seguro: sin datos ⇒ lista vacía.
+  if (!Array.isArray(products)) return []
+
+  return products.map((p) => ({
+    id: p.id,
+    name: p.name,
+    slug: p.slug,
+    thumbnail: { url: imagenProductoLocal(p.id) },
+    categoriesSlugs: (p.categories || []).map((c) => c.slug),
+  }))
+}
