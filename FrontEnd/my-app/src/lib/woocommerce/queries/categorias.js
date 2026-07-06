@@ -19,6 +19,17 @@ function imagenProductoLocal(id) {
   return `/productos/${id}.webp`
 }
 
+// Oculta la categoría por defecto de WooCommerce ("Sin categorizar"/"Uncategorized")
+// en TODA la app (nav, megamenú, catálogo, sidebar, breadcrumbs) desde un solo punto.
+function esCategoriaVisible(cat) {
+  const n = (cat?.name || "").toLowerCase().trim()
+  const s = (cat?.slug || "").toLowerCase().trim()
+  return (
+    n !== "sin categorizar" && n !== "uncategorized" &&
+    s !== "sin-categorizar" && s !== "uncategorized"
+  )
+}
+
 export async function getCategorias() {
   const cats = await fetchWoo('/products/categories', { parent: 0, per_page: 20 })
 
@@ -26,14 +37,14 @@ export async function getCategorias() {
   if (!Array.isArray(cats)) return []
 
   const catsConHijos = await Promise.all(
-    cats.map(async (cat) => {
+    cats.filter(esCategoriaVisible).map(async (cat) => {
       const children = await fetchWoo('/products/categories', { parent: cat.id })
       return {
         id: cat.id,
         name: cat.name,
         slug: cat.slug,
         image: { url: imagenCategoriaLocal(cat.name) },
-        children: (Array.isArray(children) ? children : []).map((c) => ({
+        children: (Array.isArray(children) ? children : []).filter(esCategoriaVisible).map((c) => ({
           id: c.id,
           name: c.name,
           slug: c.slug,
@@ -61,7 +72,7 @@ export async function getCategoria(slug) {
     name: cat.name,
     slug: cat.slug,
     image: { url: imagenCategoriaLocal(cat.name) },
-    children: (Array.isArray(children) ? children : []).map((c) => ({
+    children: (Array.isArray(children) ? children : []).filter(esCategoriaVisible).map((c) => ({
       id: c.id,
       name: c.name,
       slug: c.slug,

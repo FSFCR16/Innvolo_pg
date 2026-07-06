@@ -23,6 +23,10 @@ export default function Navbar({ categorias }) {
 
   useEffect(() => { setDrawerAbierto(false) }, [pathname])
 
+  // Cierra el megamenú al navegar (antes quedaba abierto tras hacer clic y el
+  // usuario no notaba que la página ya había cambiado).
+  useEffect(() => { setDropdownAbierto(false) }, [pathname])
+
   useEffect(() => {
     document.body.style.overflow = drawerAbierto ? "hidden" : ""
     return () => { document.body.style.overflow = "" }
@@ -92,7 +96,7 @@ export default function Navbar({ categorias }) {
           <div className={`hidden md:block transition-all duration-300 ease-out overflow-hidden ${
             dropdownAbierto ? "max-h-[600px] opacity-100" : "max-h-0 opacity-0"
           }`}>
-            <MegaMenu abierto={dropdownAbierto} categorias={categoriasFiltradas} />
+            <MegaMenu abierto={dropdownAbierto} categorias={categoriasFiltradas} cerrar={() => setDropdownAbierto(false)} />
           </div>
 
         </div>

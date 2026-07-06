@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useState, useEffect } from "react"
 
-export function MegaMenu({ abierto, categorias = [] }) {
+export function MegaMenu({ abierto, categorias = [], cerrar }) {
   // Filtrar "Sin categorizar"
   const categoriasVisibles = categorias.filter((cat) => {
     const nombre = (cat.name || "").toLowerCase().trim()
@@ -88,6 +88,7 @@ export function MegaMenu({ abierto, categorias = [] }) {
                   >
                     <Link
                       href={cat.href}
+                      onClick={cerrar}
                       className={`flex items-center justify-between py-3 px-1 border-b border-white/5 transition-all duration-300 ${
                         esActiva ? "pl-4" : "pl-1"
                       }`}
@@ -156,6 +157,7 @@ export function MegaMenu({ abierto, categorias = [] }) {
                     </div>
                     <Link
                       href={cat.href}
+                      onClick={cerrar}
                       className="text-dorado text-[11px] tracking-[0.2em] uppercase font-semibold border-b border-dorado/40 hover:border-dorado pb-1 transition-all duration-200 whitespace-nowrap"
                     >
                       Ver categoría
@@ -169,6 +171,7 @@ export function MegaMenu({ abierto, categorias = [] }) {
                         <Link
                           key={link.href}
                           href={link.href}
+                          onClick={cerrar}
                           className="group relative bg-white/[0.03] hover:bg-dorado/10 border border-white/5 hover:border-dorado/40 rounded-md px-4 py-3 transition-all duration-300 overflow-hidden"
                           style={{
                             transitionDelay: esActiva ? `${lidx * 30}ms` : "0ms",
