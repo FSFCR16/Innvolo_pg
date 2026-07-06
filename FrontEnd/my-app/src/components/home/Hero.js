@@ -1,14 +1,14 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
 const imagenes = [
-  { src: "/hero/carrusel-1.webp", alt: "Dotación corporativa INNVOLO — chaleco, termo y mochila personalizados en una oficina" },
-  { src: "/hero/carrusel-2.webp", alt: "Productos personalizados INNVOLO para empresas" },
-  { src: "/hero/carrusel-3.webp", alt: "Bandera INNVOLO ondeando sobre la ciudad" },
-  { src: "/hero/carrusel-4.webp", alt: "Indumentaria corporativa personalizada INNVOLO" },
+  { src: "/carrusel/1.webp", alt: "Dotación corporativa INNVOLO — chaleco, termo y mochila personalizados en una oficina" },
+  { src: "/carrusel/2.webp", alt: "Productos personalizados INNVOLO para empresas" },
+  { src: "/carrusel/3.webp", alt: "Bandera INNVOLO ondeando sobre la ciudad" },
+  { src: "/carrusel/4.webp", alt: "Indumentaria corporativa personalizada INNVOLO" },
 ]
 
 const stats = [
@@ -19,6 +19,7 @@ const stats = [
 
 export default function Hero() {
   const [activa, setActiva] = useState(0)
+  const inicioX = useRef(null)
 
   useEffect(() => {
     const intervalo = setInterval(() => {
@@ -27,8 +28,28 @@ export default function Hero() {
     return () => clearInterval(intervalo)
   }, [])
 
+  const ir = (delta) =>
+    setActiva((a) => (a + delta + imagenes.length) % imagenes.length)
+
+  // Arrastrar (mouse / trackpad / touch) para cambiar de imagen
+  const onPointerDown = (e) => {
+    inicioX.current = e.clientX
+  }
+  const onPointerUp = (e) => {
+    if (inicioX.current == null) return
+    const dx = e.clientX - inicioX.current
+    inicioX.current = null
+    if (dx > 50) ir(-1)
+    else if (dx < -50) ir(1)
+  }
+
   return (
-    <section className="relative h-screen min-h-[600px] w-full overflow-hidden bg-primary">
+    <section
+      className="relative h-screen min-h-[600px] w-full overflow-hidden bg-primary select-none"
+      style={{ touchAction: "pan-y" }}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
+    >
 
       {/* Carrusel de imágenes (cross-fade) */}
       {imagenes.map((imagen, index) => (
@@ -39,35 +60,29 @@ export default function Hero() {
           fill
           priority={index === 0}
           sizes="100vw"
+          draggable={false}
           className={`object-cover transition-opacity duration-[1200ms] ease-in-out ${
             index === activa ? "opacity-100" : "opacity-0"
           }`}
         />
       ))}
 
-      {/* Degradado navy: fuerte a la izquierda (legibilidad del texto) + base inferior */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/20" />
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-transparent to-primary/25" />
-      {/* Halo dorado sutil */}
-      <div
-        className="absolute inset-0 pointer-events-none opacity-60"
-        style={{ background: "radial-gradient(120% 90% at 78% 15%, rgba(201,162,75,.18), transparent 55%)" }}
-      />
+      {/* Degradado navy: fuerte a la izquierda (legibilidad) y transparente a la
+          derecha (deja ver la imagen). Base inferior suave. */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary/5" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/55 via-transparent to-primary/10" />
 
-      {/* Contenido editorial (alineado a la izquierda) */}
-      <div className="relative h-full max-w-7xl mx-auto px-6 md:px-8 flex items-center">
+      {/* Contenido editorial — pt para no quedar bajo el navbar */}
+      <div className="relative h-full max-w-7xl mx-auto px-6 md:px-8 flex items-center pt-24 md:pt-20">
         <div className="max-w-2xl flex flex-col anim-page">
 
-          {/* Eyebrow + regla dorada */}
-          <div className="flex items-center gap-3 mb-5">
-            <span className="h-px w-12 bg-dorado" />
-            <span className="text-[10px] md:text-xs font-bold tracking-[0.26em] uppercase text-dorado">
-              Dotación e indumentaria corporativa
-            </span>
-          </div>
+          {/* Eyebrow */}
+          <span className="text-[10px] md:text-xs font-bold tracking-[0.26em] uppercase text-dorado mb-5">
+            Dotación e indumentaria corporativa
+          </span>
 
           {/* Titular Playfair + acento cursivo */}
-          <h1 className="font-titulo font-semibold text-white text-[2.5rem] leading-[1.04] md:text-[4rem] md:leading-[1.03]">
+          <h1 className="font-titulo font-semibold text-white text-[2.5rem] leading-[1.04] md:text-[4rem] md:leading-[1.03] [text-shadow:0_2px_24px_rgba(0,0,0,0.35)]">
             Vestimos la identidad<br className="hidden sm:block" /> de tu empresa
           </h1>
           <span className="font-cursiva text-dorado text-3xl md:text-5xl mt-2 md:mt-3">
@@ -75,7 +90,7 @@ export default function Hero() {
           </span>
 
           {/* Subtítulo */}
-          <p className="text-white/75 text-sm md:text-[15px] max-w-lg mt-6 leading-relaxed">
+          <p className="text-white/80 text-sm md:text-[15px] max-w-lg mt-6 leading-relaxed">
             Diseñamos y producimos prendas y dotación para empresas que quieren
             proyectar identidad, estilo e innovación — en toda Colombia.
           </p>
@@ -103,7 +118,7 @@ export default function Hero() {
                 <span className="font-titulo font-semibold text-dorado text-xl md:text-2xl leading-none">
                   {s.n}
                 </span>
-                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.12em] text-white/55 mt-1.5">
+                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.12em] text-white/60 mt-1.5">
                   {s.k}
                 </span>
               </div>
@@ -113,7 +128,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Indicadores del carrusel */}
+      {/* Indicadores del carrusel (clickeables) */}
       <div className="absolute bottom-6 left-6 md:left-auto md:right-10 z-10 flex gap-2">
         {imagenes.map((_, i) => (
           <button
