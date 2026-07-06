@@ -1,0 +1,108 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@theme {
+  --color-primary: #0D1B2A;
+  --color-dorado: #C9A84C;
+  --color-gris: #4A4A4A;
+
+  --font-sans: "Inter", sans-serif;
+  --font-titulo: "Playfair Display", serif;
+  --font-cursiva: "Dancing Script", cursive;
+}
+
+body {
+  background: white;
+  color: var(--color-gris);
+  font-family: var(--font-sans);
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.megamenu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.megamenu.abierto {
+  max-height: 500px;
+}
+
+#nprogress .bar {
+  background: #C9A84C !important;
+  height: 3px !important;
+}
+
+/* ocultar scroll horizontal */
+::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ===== ANIMACIONES PRO ===== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeScale {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Cinta animada (banda de marca) */
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+  will-change: transform;
+}
+.marquee-pausa:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* Clases */
+.anim-grid {
+  animation: fadeInUp 0.45s ease;
+}
+
+.anim-card {
+  animation: fadeScale 0.35s ease;
+}
+
+.anim-page {
+  animation: pageEnter 0.35s ease;
+}

@@ -1,0 +1,856 @@
+{
+  "13": {
+    "name": "Polo",
+    "description": "<p>Polo, camisa o camiseta corporativa personalizable con logo. Disponible en algodón o poliéster.</p>\n",
+    "short_description": "<p>Polo, camisa o camiseta corporativa personalizable con logo. Disponible en algodón o poliéster.</p>\n",
+    "meta_data": [
+      {
+        "id": 22,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/CAMISA-v1.glb"
+      },
+      {
+        "id": 23,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7241,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7242,
+        "key": "_customization_zones",
+        "value": "field_6a1371d138133"
+      },
+      {
+        "id": 7271,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "35": {
+    "name": "Gorra malla personalizada",
+    "description": "<p>Gorra estilo trucker con panel frontal sólido y malla trasera. Bordado o estampado.</p>\n",
+    "short_description": "<p>Gorra estilo trucker con panel frontal sólido y malla trasera. Bordado o estampado.</p>\n",
+    "meta_data": [
+      {
+        "id": 496,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/GORRA-DE-MALLA.glb"
+      },
+      {
+        "id": 497,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7244,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7273,
+        "key": "tipo_3d",
+        "value": "gorra"
+      }
+    ]
+  },
+  "30": {
+    "name": "Gorra drill personalizada",
+    "description": "<p>Gorra estructurada en drill con cierre trasero ajustable. Bordado frontal a color.</p>\n",
+    "short_description": "<p>Gorra estructurada en drill con cierre trasero ajustable. Bordado frontal a color.</p>\n",
+    "meta_data": [
+      {
+        "id": 393,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/GORRA-DE-DRILL.glb"
+      },
+      {
+        "id": 394,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7243,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7272,
+        "key": "tipo_3d",
+        "value": "gorra"
+      }
+    ]
+  },
+  "57": {
+    "name": "Chaleco personalizado",
+    "description": "<p>Chaleco corporativo sin mangas, disponible en varios materiales. Bordado o estampado.</p>\n",
+    "short_description": "<p>Chaleco corporativo sin mangas, disponible en varios materiales. Bordado o estampado.</p>\n",
+    "meta_data": [
+      {
+        "id": 970,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/CHALECO.glb"
+      },
+      {
+        "id": 971,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7246,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7275,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "40": {
+    "name": "Chaqueta acolchada personalizada",
+    "description": "<p>Chaqueta acolchada tipo bomber o puffer, ideal para climas fríos. Con bordado o estampado.</p>\n",
+    "short_description": "<p>Chaqueta acolchada tipo bomber o puffer, ideal para climas fríos. Con bordado o estampado.</p>\n",
+    "meta_data": [
+      {
+        "id": 599,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/CHAQUETA-ACOLCHADA.glb"
+      },
+      {
+        "id": 600,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7245,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7274,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "74": {
+    "name": "Chaqueta rompevientos personalizada",
+    "description": "<p>Chaqueta ligera cortaviento ideal para actividades al aire libre o dotaciones.</p>\n",
+    "short_description": "<p>Chaqueta ligera cortaviento ideal para actividades al aire libre o dotaciones.</p>\n",
+    "meta_data": [
+      {
+        "id": 1341,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/ROMPEVIENTOS.glb"
+      },
+      {
+        "id": 1342,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7247,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7276,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "91": {
+    "name": "Chaqueta jean personalizada",
+    "description": "<p>Chaqueta en jean personalizable con parches, bordado o impresión.</p>\n",
+    "short_description": "<p>Chaqueta en jean personalizable con parches, bordado o impresión.</p>\n",
+    "meta_data": [
+      {
+        "id": 1712,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/CHAQUETA-DE-JEAN.glb"
+      },
+      {
+        "id": 1713,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7248,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7277,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "108": {
+    "name": "Chaqueta cuero personalizada",
+    "description": "<p>Chaqueta en cuero o cuero sintético con personalización en espalda o pecho.</p>\n",
+    "short_description": "<p>Chaqueta en cuero o cuero sintético con personalización en espalda o pecho.</p>\n",
+    "meta_data": [
+      {
+        "id": 2083,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/CHAQUETA-DE-CUERO.glb"
+      },
+      {
+        "id": 2084,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7249,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7278,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "125": {
+    "name": "Hoodie / Sudadera personalizada",
+    "description": "<p>Hoodie con capota o sudadera sin capota, personalizable con logo corporativo.</p>\n",
+    "short_description": "<p>Hoodie con capota o sudadera sin capota, personalizable con logo corporativo.</p>\n",
+    "meta_data": [
+      {
+        "id": 2454,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/HOODIE.glb"
+      },
+      {
+        "id": 2455,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7250,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7279,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "142": {
+    "name": "Saco personalizado",
+    "description": "<p>Saco corporativo en tela tejida o lana, con bordado discreto de logo.</p>\n",
+    "short_description": "<p>Saco corporativo en tela tejida o lana, con bordado discreto de logo.</p>\n",
+    "meta_data": [
+      {
+        "id": 2825,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/SACO-CUELLO-REDONDO.glb"
+      },
+      {
+        "id": 2826,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7251,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7280,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "159": {
+    "name": "Uniforme chef personalizado",
+    "description": "<p>Chaqueta y pantalón de chef en algodón-poliéster. Personalizable con logo bordado.</p>\n",
+    "short_description": "<p>Chaqueta y pantalón de chef en algodón-poliéster. Personalizable con logo bordado.</p>\n",
+    "meta_data": [
+      {
+        "id": 3196,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/CHEF.glb"
+      },
+      {
+        "id": 3197,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7252,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7281,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "176": {
+    "name": "Uniforme servicio personalizado",
+    "description": "<p>Uniforme completo para personal de servicio: camisa, pantalón o falda.</p>\n",
+    "short_description": "<p>Uniforme completo para personal de servicio: camisa, pantalón o falda.</p>\n",
+    "meta_data": [
+      {
+        "id": 3567,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/UNIFORME-DE-SERVICIO.glb"
+      },
+      {
+        "id": 3568,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7253,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7282,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "193": {
+    "name": "Delantal personalizado",
+    "description": "<p>Delantal de cocina o servicio con bolsillo. Disponible en varios colores con logo bordado.</p>\n",
+    "short_description": "<p>Delantal de cocina o servicio con bolsillo. Disponible en varios colores con logo bordado.</p>\n",
+    "meta_data": [
+      {
+        "id": 3938,
+        "key": "model_3d_url",
+        "value": ""
+      },
+      {
+        "id": 3939,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7283,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "210": {
+    "name": "Cofia personalizada",
+    "description": "<p>Cofia desechable o en tela para personal de cocina y salud. Con logo impreso.</p>\n",
+    "short_description": "<p>Cofia desechable o en tela para personal de cocina y salud. Con logo impreso.</p>\n",
+    "meta_data": [
+      {
+        "id": 4309,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/COFLA-GORRO.glb"
+      },
+      {
+        "id": 4310,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7254,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7284,
+        "key": "tipo_3d",
+        "value": "gorra"
+      }
+    ]
+  },
+  "215": {
+    "name": "Bata / Overol personalizado",
+    "description": "<p>Bata de laboratorio, clínica o industrial / overol de trabajo personalizable.</p>\n",
+    "short_description": "<p>Bata de laboratorio, clínica o industrial / overol de trabajo personalizable.</p>\n",
+    "meta_data": [
+      {
+        "id": 4416,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/BATA.glb"
+      },
+      {
+        "id": 4417,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7255,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7285,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "232": {
+    "name": "Botilito bebidas frías personalizado",
+    "description": "<p>Botilito en plástico libre de BPA para bebidas frías. Impresión 360° full color.</p>\n",
+    "short_description": "<p>Botilito en plástico libre de BPA para bebidas frías. Impresión 360° full color.</p>\n",
+    "meta_data": [
+      {
+        "id": 4787,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/TERMO.glb"
+      },
+      {
+        "id": 4788,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7256,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7286,
+        "key": "tipo_3d",
+        "value": "recipiente"
+      }
+    ]
+  },
+  "245": {
+    "name": "Vaso personalizado",
+    "description": "<p>Vaso plástico o acrílico personalizado con logo. Ideal para eventos y promociones.</p>\n",
+    "short_description": "<p>Vaso plástico o acrílico personalizado con logo. Ideal para eventos y promociones.</p>\n",
+    "meta_data": [
+      {
+        "id": 5070,
+        "key": "model_3d_url",
+        "value": ""
+      },
+      {
+        "id": 5071,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7287,
+        "key": "tipo_3d",
+        "value": "recipiente"
+      }
+    ]
+  },
+  "250": {
+    "name": "Pocillo personalizado",
+    "description": "<p>Pocillo cerámico o de acero con impresión de logo a todo color.</p>\n",
+    "short_description": "<p>Pocillo cerámico o de acero con impresión de logo a todo color.</p>\n",
+    "meta_data": [
+      {
+        "id": 5173,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/POCILLO.glb"
+      },
+      {
+        "id": 5174,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7257,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7288,
+        "key": "tipo_3d",
+        "value": "recipiente"
+      }
+    ]
+  },
+  "255": {
+    "name": "Esfero personalizado",
+    "description": "<p>Esfero plástico o metálico con grabado láser o impresión de logo.</p>\n",
+    "short_description": "<p>Esfero plástico o metálico con grabado láser o impresión de logo.</p>\n",
+    "meta_data": [
+      {
+        "id": 5276,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/ESFERO.glb"
+      },
+      {
+        "id": 5277,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7258,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7289,
+        "key": "tipo_3d",
+        "value": "accesorio"
+      }
+    ]
+  },
+  "260": {
+    "name": "Llavero personalizado",
+    "description": "<p>Llavero en acrílico, metal o caucho con logo personalizado.</p>\n",
+    "short_description": "<p>Llavero en acrílico, metal o caucho con logo personalizado.</p>\n",
+    "meta_data": [
+      {
+        "id": 5379,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/LLAVERO.glb"
+      },
+      {
+        "id": 5380,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7259,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7290,
+        "key": "tipo_3d",
+        "value": "accesorio"
+      }
+    ]
+  },
+  "265": {
+    "name": "Bandera personalizada",
+    "description": "<p>Bandera publicitaria en tela poliéster, sublimado full color. Varios tamaños.</p>\n",
+    "short_description": "<p>Bandera publicitaria en tela poliéster, sublimado full color. Varios tamaños.</p>\n",
+    "meta_data": [
+      {
+        "id": 5482,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/BANDERA.glb"
+      },
+      {
+        "id": 5483,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7260,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7291,
+        "key": "tipo_3d",
+        "value": "accesorio"
+      }
+    ]
+  },
+  "270": {
+    "name": "Bolsa en cambre personalizada",
+    "description": "<p>Bolsa en tela cambre no tejida con logo impreso. Económica y ecológica.</p>\n",
+    "short_description": "<p>Bolsa en tela cambre no tejida con logo impreso. Económica y ecológica.</p>\n",
+    "meta_data": [
+      {
+        "id": 5585,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/BOLSA-DE-CAMBRE.glb"
+      },
+      {
+        "id": 5586,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7261,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7292,
+        "key": "tipo_3d",
+        "value": "bolso"
+      }
+    ]
+  },
+  "275": {
+    "name": "Tote bag personalizada",
+    "description": "<p>Tote bag en lona natural o de color, serigrafía o sublimado. Manija larga.</p>\n",
+    "short_description": "<p>Tote bag en lona natural o de color, serigrafía o sublimado. Manija larga.</p>\n",
+    "meta_data": [
+      {
+        "id": 5688,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/TOTE-BAG.glb"
+      },
+      {
+        "id": 5689,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7262,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7293,
+        "key": "tipo_3d",
+        "value": "bolso"
+      }
+    ]
+  },
+  "280": {
+    "name": "Mochila personalizada",
+    "description": "<p>Mochila escolar o ejecutiva con compartimiento laptop. Bordado o sublimado.</p>\n",
+    "short_description": "<p>Mochila escolar o ejecutiva con compartimiento laptop. Bordado o sublimado.</p>\n",
+    "meta_data": [
+      {
+        "id": 5791,
+        "key": "model_3d_url",
+        "value": ""
+      },
+      {
+        "id": 5792,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7294,
+        "key": "tipo_3d",
+        "value": "bolso"
+      }
+    ]
+  },
+  "285": {
+    "name": "Maletín deportivo / Viaje personalizado",
+    "description": "<p>Maletín tipo duffle o deportivo con logo bordado. Ideal para equipos y empresas.</p>\n",
+    "short_description": "<p>Maletín tipo duffle o deportivo con logo bordado. Ideal para equipos y empresas.</p>\n",
+    "meta_data": [
+      {
+        "id": 5894,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/MALETA.glb"
+      },
+      {
+        "id": 5895,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7263,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7295,
+        "key": "tipo_3d",
+        "value": "bolso"
+      }
+    ]
+  },
+  "290": {
+    "name": "Chaqueta prom personalizada",
+    "description": "<p>Chaqueta de grado o prom con nombre y logo bordado. Varios estilos.</p>\n",
+    "short_description": "<p>Chaqueta de grado o prom con nombre y logo bordado. Varios estilos.</p>\n",
+    "meta_data": [
+      {
+        "id": 5997,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/CHAQUETA-PROM.glb"
+      },
+      {
+        "id": 5998,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7264,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7296,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "307": {
+    "name": "Hoodie prom personalizado",
+    "description": "<p>Hoodie de grado con nombre bordado y diseño personalizado de grupo.</p>\n",
+    "short_description": "<p>Hoodie de grado con nombre bordado y diseño personalizado de grupo.</p>\n",
+    "meta_data": [
+      {
+        "id": 6368,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/HOODIE-PROM.glb"
+      },
+      {
+        "id": 6369,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7265,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7297,
+        "key": "tipo_3d",
+        "value": "torso"
+      }
+    ]
+  },
+  "324": {
+    "name": "Pañoleta para mascotas personalizada",
+    "description": "<p>Pañoleta bandana para perros y gatos, sublimado full color con nombre o logo.</p>\n",
+    "short_description": "<p>Pañoleta bandana para perros y gatos, sublimado full color con nombre o logo.</p>\n",
+    "meta_data": [
+      {
+        "id": 6739,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/PANOLETA.glb"
+      },
+      {
+        "id": 6740,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7266,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7298,
+        "key": "tipo_3d",
+        "value": "mascota"
+      }
+    ]
+  },
+  "329": {
+    "name": "Juguete para mascotas personalizado",
+    "description": "<p>Juguete mordible o de tela con logo impreso. Ideal para regalo corporativo pet-friendly.</p>\n",
+    "short_description": "<p>Juguete mordible o de tela con logo impreso. Ideal para regalo corporativo pet-friendly.</p>\n",
+    "meta_data": [
+      {
+        "id": 6842,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/JUGUETES.glb"
+      },
+      {
+        "id": 6843,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7267,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7299,
+        "key": "tipo_3d",
+        "value": "mascota"
+      }
+    ]
+  },
+  "339": {
+    "name": "Termo agua para mascotas personalizado",
+    "description": "<p>Dispensador de agua portátil para mascotas con logo grabado o impreso.</p>\n",
+    "short_description": "<p>Dispensador de agua portátil para mascotas con logo grabado o impreso.</p>\n",
+    "meta_data": [
+      {
+        "id": 7048,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/TERMO-PARA-MASCOTA.glb"
+      },
+      {
+        "id": 7049,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7269,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7301,
+        "key": "tipo_3d",
+        "value": "mascota"
+      }
+    ]
+  },
+  "334": {
+    "name": "Portacomidas para mascotas personalizado",
+    "description": "<p>Portacomidas o comedero personalizable con nombre de la mascota o logo de marca.</p>\n",
+    "short_description": "<p>Portacomidas o comedero personalizable con nombre de la mascota o logo de marca.</p>\n",
+    "meta_data": [
+      {
+        "id": 6945,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/PORTACOMIDAS-MASCOTAS.glb"
+      },
+      {
+        "id": 6946,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7268,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7300,
+        "key": "tipo_3d",
+        "value": "mascota"
+      }
+    ]
+  },
+  "344": {
+    "name": "Accesorios para mascotas personalizados",
+    "description": "<p>Otros accesorios personalizables para mascotas: collares, correas, ropa.</p>\n",
+    "short_description": "<p>Otros accesorios personalizables para mascotas: collares, correas, ropa.</p>\n",
+    "meta_data": [
+      {
+        "id": 7151,
+        "key": "model_3d_url",
+        "value": "http://localhost:3000/modelos/ACCESORIOS-PARA-MASCOTA.glb"
+      },
+      {
+        "id": 7152,
+        "key": "customization_zones",
+        "value": "[]"
+      },
+      {
+        "id": 7270,
+        "key": "_model_3d_url",
+        "value": "field_6a13719b38132"
+      },
+      {
+        "id": 7302,
+        "key": "tipo_3d",
+        "value": "mascota"
+      }
+    ]
+  }
+}

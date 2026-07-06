@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>INNVOLO · Costos de Mantenimiento y Migración</title>
+<style>
+  :root{
+    --navy:#0d1b3e;
+    --navy-2:#13265a;
+    --gold:#c9a24b;
+    --gold-soft:#e6c878;
+    --cream:#f7f3ea;
+    --paper:#ffffff;
+    --ink:#1b2233;
+    --muted:#6b7280;
+    --line:#e7e2d6;
+    --green:#1f7a4d;
+    --shadow:0 18px 50px -22px rgba(13,27,62,.45);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    background:linear-gradient(180deg,#f9f6ef 0%,#f1ece0 100%);
+    color:var(--ink);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+
+  /* HERO */
+  header.hero{
+    background:
+      radial-gradient(1200px 400px at 80% -10%, rgba(201,162,75,.22), transparent 60%),
+      linear-gradient(135deg,var(--navy) 0%, var(--navy-2) 100%);
+    color:#fff;padding:54px 0 64px;position:relative;overflow:hidden;
+  }
+  header.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:4px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .eyebrow{letter-spacing:.32em;text-transform:uppercase;font-size:12px;color:var(--gold-soft);font-weight:600}
+  .hero h1{font-size:38px;font-weight:700;margin:14px 0 10px;line-height:1.12}
+  .hero p{max-width:640px;color:#d7ddec;font-size:16px}
+  .rule{width:60px;height:3px;background:var(--gold);border-radius:3px;margin:18px 0}
+
+  /* TRM bar */
+  .trm{
+    margin-top:30px;display:inline-flex;align-items:center;gap:12px;flex-wrap:wrap;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);
+    padding:12px 18px;border-radius:14px;backdrop-filter:blur(4px);
+  }
+  .trm label{font-size:13px;color:#cfd6e8}
+  .trm input{
+    width:110px;background:#fff;border:none;border-radius:8px;padding:8px 10px;
+    font-size:15px;font-weight:700;color:var(--navy);text-align:right;
+  }
+  .trm small{color:#9fb0d4;font-size:12px}
+
+  main{padding:46px 0 70px}
+  section{margin-bottom:46px}
+  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .sec-num{
+    width:38px;height:38px;flex:none;border-radius:50%;background:var(--navy);color:var(--gold-soft);
+    display:grid;place-items:center;font-weight:700;font-size:16px;
+  }
+  .sec-head h2{font-size:24px;color:var(--navy);font-weight:700}
+  .sec-sub{color:var(--muted);margin:2px 0 22px 52px;font-size:14.5px}
+
+  /* explainer box */
+  .explain{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:0 0 22px}
+  .explain .ebox{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .explain .ebox h4{font-size:14px;color:var(--navy);margin-bottom:4px;display:flex;align-items:center;gap:8px}
+  .explain .ebox h4 .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .explain .ebox p{font-size:13.5px;color:#4a5263}
+
+  /* cards */
+  .grid{display:grid;gap:18px}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .card{
+    background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;box-shadow:var(--shadow);position:relative;
+  }
+  .card.recommended{border:1.5px solid var(--gold)}
+  .badge{
+    position:absolute;top:-12px;right:18px;background:var(--gold);color:var(--navy);
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:5px 12px;border-radius:20px;box-shadow:0 6px 14px -6px rgba(201,162,75,.8)
+  }
+  .card h3{font-size:18px;color:var(--navy);margin-bottom:4px}
+  .card .tag{font-size:13px;color:var(--muted);margin-bottom:14px}
+  .price{font-size:30px;font-weight:800;color:var(--navy);line-height:1}
+  .price .per{font-size:14px;font-weight:500;color:var(--muted)}
+  .usd{font-size:12.5px;color:#9aa3b2;margin-top:4px}
+  ul.feat{list-style:none;margin:16px 0 0;border-top:1px dashed var(--line);padding-top:14px}
+  ul.feat li{font-size:14px;color:#3a4253;padding:5px 0 5px 24px;position:relative}
+  ul.feat li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700}
+
+  /* toggle */
+  .toggle{display:inline-flex;background:#eee7d8;border-radius:30px;padding:4px;margin-bottom:20px}
+  .toggle button{
+    border:none;background:transparent;padding:9px 20px;border-radius:24px;cursor:pointer;
+    font-size:14px;font-weight:600;color:var(--muted);transition:.18s;
+  }
+  .toggle button.active{background:var(--navy);color:#fff;box-shadow:0 6px 16px -8px rgba(13,27,62,.7)}
+
+  .pill{display:inline-block;background:#eaf3ee;color:var(--green);font-size:12.5px;font-weight:600;
+    padding:4px 12px;border-radius:20px;margin-top:10px}
+  .note{font-size:13px;color:var(--muted);margin-top:16px;background:#faf7f0;border-left:3px solid var(--gold);
+    padding:10px 14px;border-radius:0 8px 8px 0}
+
+  /* hosting table */
+  .htable{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow)}
+  .htable th,.htable td{padding:14px 16px;text-align:center;font-size:14px;border-bottom:1px solid var(--line)}
+  .htable thead th{background:var(--navy);color:#fff;font-weight:600;font-size:13px}
+  .htable thead th small{display:block;font-weight:400;color:#aebbd9;font-size:11px;margin-top:2px}
+  .htable td:first-child,.htable th:first-child{text-align:left}
+  .htable tbody tr:last-child td{border-bottom:none}
+  .htable .planname{font-weight:700;color:var(--navy);font-size:15px}
+  .htable .planname small{display:block;font-weight:400;color:var(--muted);font-size:12px;margin-top:2px}
+  .htable .big{font-weight:800;color:var(--navy);font-size:16px}
+  .htable .sub{display:block;font-size:11.5px;color:#9aa3b2;margin-top:2px}
+  .htable .col-promo{background:#fbf7ec}
+  .htable .col-renew{background:#f7f2f2}
+  .htable tr.rec td{background:#fdfaf0}
+  .htable .reclabel{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.06em;padding:2px 8px;border-radius:10px;margin-left:6px;vertical-align:middle}
+  .legend-dot{width:10px;height:10px;border-radius:50%;display:inline-block;margin-right:6px;vertical-align:middle}
+
+  /* timeline */
+  .timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:8px}
+  .step{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px;text-align:center}
+  .step .d{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .step .t{font-size:13px;color:#3a4253;margin-top:6px}
+
+  /* maintenance calculator */
+  .calc{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end;margin-top:16px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-size:12.5px;font-weight:600;color:var(--muted)}
+  .field select,.field input[type=number]{
+    border:1px solid var(--line);background:#fff;border-radius:10px;padding:11px 12px;font-size:14px;color:var(--ink);min-width:200px
+  }
+  .result-box{
+    margin-top:18px;background:linear-gradient(135deg,var(--navy),var(--navy-2));color:#fff;
+    border-radius:14px;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px
+  }
+  .result-box .lbl{font-size:13px;color:#c9d2e6;letter-spacing:.04em}
+  .result-box .val{font-size:28px;font-weight:800;color:var(--gold-soft)}
+
+  /* total simulator */
+  .sim{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+  .sim .row{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px dashed var(--line);font-size:15px}
+  .sim .row:last-of-type{border-bottom:none}
+  .sim .row .v{font-weight:700;color:var(--navy)}
+  .grand{margin-top:14px;background:var(--navy);color:#fff;border-radius:14px;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}
+  .grand .g-lbl{font-size:14px;color:#c9d2e6}
+  .grand .g-val{font-size:26px;font-weight:800;color:var(--gold-soft)}
+
+  footer{text-align:center;color:var(--muted);font-size:12.5px;padding:30px 20px 50px}
+  footer a{color:var(--navy)}
+
+  @media(max-width:760px){
+    .grid.cols-2,.grid.cols-3,.explain{grid-template-columns:1fr}
+    .timeline{grid-template-columns:repeat(2,1fr)}
+    .hero h1{font-size:30px}
+    .sec-sub{margin-left:0}
+    .htable th,.htable td{padding:10px 8px;font-size:12.5px}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">INNVOLO · Catálogo Web 3D</div>
+    <h1>Costos de mantenimiento, hosting y migración</h1>
+    <div class="rule"></div>
+    <p>Resumen claro de lo que cuesta mantener el sitio en línea, las opciones de soporte técnico y el escenario de migración a Shopify. Valores referenciados para Colombia, en pesos colombianos (COP).</p>
+
+    <div class="trm">
+      <label for="trm">TRM (1 USD = COP)</label>
+      <input id="trm" type="number" value="4000" min="1" step="50" />
+      <small>Edita la TRM y todos los precios se actualizan</small>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- 1. HOSTING -->
+  <section>
+    <div class="sec-head"><div class="sec-num">1</div><h2>Hosting · Hostinger</h2></div>
+    <p class="sec-sub">Es el servidor donde vive WordPress + WooCommerce. Es un costo recurrente. Aquí ves <strong>cuánto cuesta pagando mes a mes</strong> y <strong>pagando un año por adelantado</strong>, además del precio de renovación.</p>
+
+    <div class="explain">
+      <div class="ebox">
+        <h4><span class="dot" style="background:var(--gold)"></span>¿Qué es el precio promocional?</h4>
+        <p>Es el precio de enganche del <strong>primer periodo que contratas</strong> (por eso pagar anual sale mucho más barato por mes). Es un descuento de bienvenida que solo aplica esa primera vez.</p>
+      </div>
+      <div class="ebox">
+        <h4><span class="dot" style="background:#b06a5a"></span>¿Qué es el precio de renovación?</h4>
+        <p>Cuando termina ese primer periodo, el plan <strong>se renueva al precio estándar</strong>, que es más alto. Pasa en todos los hostings. Conviene tenerlo en cuenta para el segundo año en adelante.</p>
+      </div>
+    </div>
+
+    <table class="htable">
+      <thead>
+        <tr>
+          <th>Plan</th>
+          <th>Pago mensual<small>mes a mes</small></th>
+          <th class="col-promo">Pago anual · promocional<small>1er año, por adelantado</small></th>
+          <th class="col-renew">Renovación anual<small>2º año en adelante</small></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="planname">Premium <small>Catálogo de tráfico medio</small></td>
+          <td><span class="big" data-cop data-usd="11.99">—</span><span class="sub" data-usdsub data-usd="11.99"></span></td>
+          <td class="col-promo"><span class="big" data-cop data-usd="3.99">—</span><span class="sub" data-year data-usd="3.99"></span></td>
+          <td class="col-renew"><span class="big" data-cop data-usd="10.99">—</span><span class="sub" data-year data-usd="10.99"></span></td>
+        </tr>
+        <tr class="rec">
+          <td class="planname">Business <span class="reclabel">Recomendado</span><small>Mejor para WooCommerce + 3D (.glb)</small></td>
+          <td><span class="big" data-cop data-usd="24.99">—</span><span class="sub" data-usdsub data-usd="24.99"></span></td>
+          <td class="col-promo"><span class="big" data-cop data-usd="4.99">—</span><span class="sub" data-year data-usd="4.99"></span></td>
+          <td class="col-renew"><span class="big" data-cop data-usd="16.99">—</span><span class="sub" data-year data-usd="16.99"></span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Recomendación:</strong> el plan <strong>Business pagando anual</strong> es el mejor balance — los modelos 3D consumen más recursos que un sitio normal, y el pago anual baja mucho la cuota mensual. Hostinger cobra en USD, por eso los valores en COP suben o bajan con la TRM. Precios aprox., confirma al momento de contratar.</div>
+
+    <h3 style="margin:34px 0 4px;color:var(--navy);font-size:18px">¿Qué te da cada plan, en palabras simples?</h3>
+    <p class="sec-sub" style="margin:0 0 18px 0">Piensa en el hosting como el "local arrendado" donde vive tu página: entre más grande el plan, más rápido y más capacidad tiene.</p>
+    <div class="grid cols-2">
+      <div class="card">
+        <h3>Premium</h3>
+        <div class="tag">El plan de entrada para estar en internet</div>
+        <ul class="feat">
+          <li>Tu página disponible para todo el mundo, las 24 horas</li>
+          <li>El candado de seguridad que dice "sitio seguro" (SSL)</li>
+          <li>Correos con tu propio dominio (ej. <em>hola@tumarca.com</em>)</li>
+          <li>Copia de seguridad <strong>semanal</strong> por si algo se daña</li>
+          <li>Soporte por chat cuando lo necesites</li>
+        </ul>
+        <div class="note" style="margin-top:14px">Ideal si: el catálogo recibe visitas moderadas y los modelos 3D no son muy pesados.</div>
+      </div>
+      <div class="card recommended">
+        <span class="badge">Tu caso</span>
+        <h3>Business</h3>
+        <div class="tag">El recomendado para un catálogo con modelos 3D</div>
+        <ul class="feat">
+          <li><strong>Todo lo del Premium</strong>, y además…</li>
+          <li>Un "motor" más potente → las páginas y los 3D cargan más rápido</li>
+          <li>Copia de seguridad <strong>diaria</strong> (no semanal)</li>
+          <li>Más espacio y capacidad para crecer sin que se ponga lento</li>
+          <li>Acelerador de velocidad para visitantes de cualquier ciudad/país</li>
+        </ul>
+        <div class="note" style="margin-top:14px">Ideal si: tu sitio muestra modelos 3D pesados (tu caso). Por eso es el recomendado.</div>
+      </div>
+    </div>
+    <p class="sec-sub" style="margin:16px 0 0 0">Existen planes aún más grandes (tipo "Cloud") para cuando una página recibe muchísimas visitas; hoy no los necesitas.</p>
+  </section>
+
+  <!-- 2. MANTENIMIENTO -->
+  <section>
+    <div class="sec-head"><div class="sec-num">2</div><h2>Mantenimiento técnico</h2></div>
+    <p class="sec-sub">Dos formas de cobrar el soporte continuo (actualizaciones, arreglos, nuevas funciones). Elige la que prefieras — puedes mostrarle ambas al cliente.</p>
+
+    <div class="toggle" id="maintToggle">
+      <button class="active" data-maint="A">Opción A · Por función</button>
+      <button data-maint="B">Opción B · Plan fijo mensual</button>
+    </div>
+
+    <!-- OPCION A -->
+    <div id="maintA">
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Función sencilla</h3>
+          <div class="tag">Cambio de texto, color, imagen, ajuste menor</div>
+          <div class="price" style="color:var(--green)">Sin costo</div>
+          <div class="usd">Incluido en la relación</div>
+        </div>
+        <div class="card">
+          <h3>Función media</h3>
+          <div class="tag">Sección nueva, ajuste de visor, query, formulario</div>
+          <div class="price" data-static-cop="60000">—</div>
+          <div class="usd">Valor estimado por función</div>
+        </div>
+        <div class="card recommended">
+          <span class="badge">Tope</span>
+          <h3>Función pesada</h3>
+          <div class="tag">Integración, módulo nuevo, lógica compleja, IA</div>
+          <div class="price">Hasta <span data-static-cop="150000">—</span></div>
+          <div class="usd">Nunca supera este tope</div>
+        </div>
+      </div>
+
+      <div class="calc">
+        <div class="field">
+          <label for="featSel">Simula el costo de una función</label>
+          <select id="featSel">
+            <option value="0">Sencilla — sin costo</option>
+            <option value="60000" selected>Media — $60.000</option>
+            <option value="150000">Pesada — hasta $150.000</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="featQty">Cantidad de funciones</label>
+          <input id="featQty" type="number" value="1" min="1" step="1" />
+        </div>
+      </div>
+      <div class="result-box">
+        <span class="lbl">Total estimado de esta solicitud</span>
+        <span class="val" id="featTotal">—</span>
+      </div>
+      <div class="note">Modelo <strong>pago por uso</strong>: el cliente solo paga cuando pide algo. Las cosas sencillas no se cobran; lo pesado tiene un techo de <strong>$150.000</strong> para que nunca haya sorpresas.</div>
+    </div>
+
+    <!-- OPCION B -->
+    <div id="maintB" style="display:none">
+      <div class="card recommended" style="max-width:460px">
+        <span class="badge">Plan fijo</span>
+        <h3>Mantenimiento mensual</h3>
+        <div class="tag">Cuota plana, tranquilidad todo el mes</div>
+        <div class="price" data-static-cop="55000">—</div>
+        <span class="per" style="color:var(--muted);font-size:14px">por mes</span>
+        <ul class="feat">
+          <li>Funciones sencillas ilimitadas sin costo extra</li>
+          <li>Actualizaciones de WordPress, plugins y seguridad</li>
+          <li>Monitoreo y backups verificados</li>
+          <li>Soporte prioritario</li>
+        </ul>
+        <div class="pill" id="maintBYear">Equivale a — /año</div>
+      </div>
+      <div class="note">Las funciones <strong>medias o pesadas</strong> que se salgan del mantenimiento normal se cotizan aparte (con el mismo tope de $150.000 por función pesada).</div>
+    </div>
+  </section>
+
+  <!-- 3. MIGRACION SHOPIFY -->
+  <section>
+    <div class="sec-head"><div class="sec-num">3</div><h2>Migración a Shopify</h2></div>
+    <p class="sec-sub">Escenario alternativo: mover el catálogo a Shopify. Tiempo estimado de migración: <strong>1 semana</strong>. Incluye el costo de la plataforma (suscripción en Colombia) más un trabajo único de migración.</p>
+
+    <div class="timeline">
+      <div class="step"><div class="d">Día 1–2</div><div class="t">Configuración de tienda y tema</div></div>
+      <div class="step"><div class="d">Día 2–3</div><div class="t">Migración de productos y categorías</div></div>
+      <div class="step"><div class="d">Día 3–4</div><div class="t">Modelos 3D e imágenes</div></div>
+      <div class="step"><div class="d">Día 5</div><div class="t">Pruebas y ajustes</div></div>
+      <div class="step"><div class="d">Día 6–7</div><div class="t">Publicación y entrega</div></div>
+    </div>
+
+    <div class="grid cols-3" style="margin-top:20px">
+      <div class="card recommended">
+        <span class="badge">Plan Colombia</span>
+        <h3>Shopify Basic</h3>
+        <div class="tag">Suscripción de la plataforma · precio Colombia</div>
+        <div class="price"><span data-cop data-usd="19">—</span> <span class="per">/mes</span></div>
+        <div class="usd" data-usdsub data-usd="19"></div>
+        <div class="pill"><span data-cop data-usd="14.25">—</span> /mes si pagas anual (~25% menos)</div>
+        <div class="note" style="margin-top:14px">Oferta de entrada frecuente: 3 meses a US$1/mes. Cobra además comisión por transacción si llegaras a vender.</div>
+      </div>
+
+      <div class="card">
+        <h3>Trabajo de migración</h3>
+        <div class="tag">Pago único por mover todo el catálogo</div>
+        <div class="field" style="margin:6px 0 4px">
+          <label for="migFee">Valor único (editable)</label>
+          <input id="migFee" type="number" value="150000" min="0" step="10000" />
+        </div>
+        <div class="usd">Pago una sola vez, no es recurrente</div>
+      </div>
+
+      <div class="card">
+        <h3>Primer mes (estimado)</h3>
+        <div class="tag">Migración + 1 mes de Shopify</div>
+        <div class="price" id="migFirstMonth">—</div>
+        <div class="usd">Luego solo pagas la suscripción mensual</div>
+      </div>
+    </div>
+    <div class="note"><strong>Nota:</strong> el sitio actual (WordPress en Hostinger) es un catálogo sin carrito. Shopify añade carrito/checkout si en el futuro se quiere vender en línea. Shopify cobra en USD, por eso el valor mensual sube o baja con la TRM.</div>
+
+    <h3 style="margin:34px 0 4px;color:var(--navy);font-size:18px">¿Qué ofrece cada plan de Shopify, en palabras simples?</h3>
+    <p class="sec-sub" style="margin:0 0 18px 0">Shopify es una "tienda lista para vender". Todos los planes te dan una tienda completa; entre más alto el plan, <strong>menos comisión te cobran por cada venta</strong> y más herramientas para crecer. Precios referencia Colombia.</p>
+    <div class="grid cols-2">
+      <div class="card recommended">
+        <span class="badge">Para empezar</span>
+        <h3>Basic · <span data-cop data-usd="19">—</span>/mes</h3>
+        <div class="tag">Suficiente para arrancar a vender en línea</div>
+        <ul class="feat">
+          <li>Tienda completa con carrito y pago en línea</li>
+          <li>Aceptas tarjetas y otros medios de pago</li>
+          <li>Subes todos los productos que quieras</li>
+          <li>Soporte 24/7 todos los días</li>
+          <li>Es el que <strong>más comisión por venta</strong> cobra (normal al empezar)</li>
+        </ul>
+        <div class="note" style="margin-top:14px">Ideal si: estás empezando o vendes poco volumen. <strong>Es el adecuado para tu caso.</strong></div>
+      </div>
+      <div class="card">
+        <h3>Grow · <span data-cop data-usd="49">—</span>/mes</h3>
+        <div class="tag">Cuando ya vendes seguido</div>
+        <ul class="feat">
+          <li>Todo lo del Basic, y además…</li>
+          <li><strong>Menos comisión</strong> por cada venta (ahorras al vender más)</li>
+          <li>Reportes para entender mejor qué se vende</li>
+          <li>Más cuentas para tu equipo de trabajo</li>
+        </ul>
+        <div class="note" style="margin-top:14px">Ideal si: ya tienes ventas constantes cada mes.</div>
+      </div>
+      <div class="card">
+        <h3>Advanced · <span data-cop data-usd="299">—</span>/mes</h3>
+        <div class="tag">Para tiendas de alto volumen</div>
+        <ul class="feat">
+          <li>Todo lo del Grow, y además…</li>
+          <li>La <strong>comisión más baja</strong> por venta</li>
+          <li>Reportes avanzados hechos a tu medida</li>
+          <li>Cálculo de costos de envío en tiempo real</li>
+        </ul>
+        <div class="note" style="margin-top:14px">Ideal si: vendes mucho y quieres exprimir cada detalle.</div>
+      </div>
+      <div class="card">
+        <h3>Plus · desde <span data-cop data-usd="2300">—</span>/mes</h3>
+        <div class="tag">Para empresas grandes</div>
+        <ul class="feat">
+          <li>Pensado para marcas con ventas muy altas</li>
+          <li>Personalización total de la tienda</li>
+          <li>Soporte dedicado y herramientas de empresa</li>
+          <li>Hoy <strong>no lo necesitas</strong>, es para escalas grandes</li>
+        </ul>
+        <div class="note" style="margin-top:14px">Ideal si: ya eres una operación grande con mucho movimiento.</div>
+      </div>
+    </div>
+    <p class="sec-sub" style="margin:16px 0 0 0">En resumen: empiezas con <strong>Basic</strong> y solo subes de plan cuando vender más justifique pagar menos comisión.</p>
+  </section>
+
+  <!-- 4. SIMULADOR TOTAL -->
+  <section>
+    <div class="sec-head"><div class="sec-num">4</div><h2>Resumen de costo mensual</h2></div>
+    <p class="sec-sub">Combina las opciones para ver el costo recurrente total. Cambia los selectores y se recalcula solo.</p>
+
+    <div class="sim">
+      <div class="calc" style="margin-top:0">
+        <div class="field">
+          <label for="simHost">Hosting / plataforma</label>
+          <select id="simHost">
+            <option value="prem-mes">Hostinger Premium · pago mensual</option>
+            <option value="prem-anual">Hostinger Premium · anual (promo)</option>
+            <option value="prem-renov">Hostinger Premium · renovación</option>
+            <option value="bus-mes">Hostinger Business · pago mensual</option>
+            <option value="bus-anual" selected>Hostinger Business · anual (promo)</option>
+            <option value="bus-renov">Hostinger Business · renovación</option>
+            <option value="shopify">Shopify Basic Colombia (mensual)</option>
+            <option value="shopify-anual">Shopify Basic Colombia (anual)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="simMaint">Mantenimiento</label>
+          <select id="simMaint">
+            <option value="0" selected>Opción A · por función (base $0)</option>
+            <option value="55000">Opción B · plan fijo $55.000/mes</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-top:20px">
+        <div class="row"><span>Hosting / plataforma</span><span class="v" id="rHost">—</span></div>
+        <div class="row"><span>Mantenimiento técnico</span><span class="v" id="rMaint">—</span></div>
+      </div>
+      <div class="grand">
+        <span class="g-lbl">Total recurrente mensual</span>
+        <span class="g-val" id="grandTotal">—</span>
+      </div>
+      <div class="grand" style="background:#1b2a52;margin-top:8px">
+        <span class="g-lbl">Equivalente anual</span>
+        <span class="g-val" id="grandYear">—</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Documento informativo · INNVOLO — Catálogo Web 3D · Valores aproximados, sujetos a la TRM del día y a la confirmación de cada plataforma.<br/>
+  Hosting: Hostinger · Plataforma alternativa: Shopify (precios Colombia) · Última revisión de precios: junio 2026.
+</footer>
+
+<script>
+  const COP = n => '$' + Math.round(n).toLocaleString('es-CO');
+  const USD = n => 'US$' + n;
+
+  function getTrm(){ const v = parseFloat(document.getElementById('trm').value); return (v && v>0) ? v : 4000; }
+
+  function render(){
+    const trm = getTrm();
+
+    // precios USD -> COP
+    document.querySelectorAll('[data-cop]').forEach(el=>{
+      el.textContent = COP(parseFloat(el.dataset.usd) * trm);
+    });
+    // subtítulo USD ("US$x /mes")
+    document.querySelectorAll('[data-usdsub]').forEach(el=>{
+      el.textContent = USD(parseFloat(el.dataset.usd)) + ' /mes';
+    });
+    // subtítulo equivalente anual ("≈ $x /año")
+    document.querySelectorAll('[data-year]').forEach(el=>{
+      el.textContent = '≈ ' + COP(parseFloat(el.dataset.usd) * trm * 12) + ' /año';
+    });
+    // valores fijos COP
+    document.querySelectorAll('[data-static-cop]').forEach(el=>{
+      el.textContent = COP(parseFloat(el.dataset.staticCop));
+    });
+
+    // mantenimiento B anual
+    document.getElementById('maintBYear').textContent = 'Equivale a ' + COP(55000*12) + ' /año';
+
+    // calculadora funciones (A)
+    const featPrice = parseFloat(document.getElementById('featSel').value);
+    const featQty = Math.max(1, parseInt(document.getElementById('featQty').value)||1);
+    document.getElementById('featTotal').textContent = COP(featPrice*featQty);
+
+    // migración primer mes (fee único + 1 mes Shopify Colombia mensual)
+    const migFee = parseFloat(document.getElementById('migFee').value)||0;
+    document.getElementById('migFirstMonth').textContent = COP(migFee + 19*trm);
+
+    // simulador total
+    const hostMap = {
+      'prem-mes'    : 11.99*trm,
+      'prem-anual'  : 3.99*trm,
+      'prem-renov'  : 10.99*trm,
+      'bus-mes'     : 24.99*trm,
+      'bus-anual'   : 4.99*trm,
+      'bus-renov'   : 16.99*trm,
+      'shopify'     : 19*trm,
+      'shopify-anual': 14.25*trm
+    };
+    const hostVal = hostMap[document.getElementById('simHost').value];
+    const maintVal = parseFloat(document.getElementById('simMaint').value);
+    document.getElementById('rHost').textContent = COP(hostVal);
+    document.getElementById('rMaint').textContent = maintVal===0 ? 'Por función (base $0)' : COP(maintVal);
+    const total = hostVal + maintVal;
+    document.getElementById('grandTotal').textContent = COP(total);
+    document.getElementById('grandYear').textContent = COP(total*12);
+  }
+
+  // toggle mantenimiento A/B
+  document.getElementById('maintToggle').addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b) return;
+    document.querySelectorAll('#maintToggle button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const m = b.dataset.maint;
+    document.getElementById('maintA').style.display = m==='A' ? 'block':'none';
+    document.getElementById('maintB').style.display = m==='B' ? 'block':'none';
+  });
+
+  // inputs que recalculan
+  ['trm','featSel','featQty','migFee','simHost','simMaint'].forEach(id=>{
+    document.getElementById(id).addEventListener('input', render);
+    document.getElementById(id).addEventListener('change', render);
+  });
+
+  render();
+</script>
+</body>
+</html>

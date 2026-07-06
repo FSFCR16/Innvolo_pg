@@ -1,0 +1,8 @@
+# URL de tu sitio WordPress en Hostinger (sin slash al final)
+WC_BASE_URL=https://tu-dominio.com
+
+# WooCommerce REST API keys
+# Generar en: WooCommerce > Settings > Advanced > REST API
+# Permisos: Read/Write
+WC_KEY=ck_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+WC_SECRET=cs_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

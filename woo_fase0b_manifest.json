@@ -1,0 +1,218 @@
+{
+  "1": {
+    "nombre": "Camisa Corporativa",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\01-camisa-corporativa.png",
+    "alt": "Camisa Corporativa",
+    "crop": null
+  },
+  "2": {
+    "nombre": "Camiseta Corporativa",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\02-camiseta-corporativa.png",
+    "alt": "Camiseta Corporativa",
+    "crop": null
+  },
+  "3": {
+    "nombre": "Polo Corporativo",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\03-polo-corporativo.png",
+    "alt": "Polo Corporativo",
+    "crop": null
+  },
+  "4": {
+    "nombre": "Gorra Malla",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\04-gorra-malla.png",
+    "alt": "Gorra Malla",
+    "crop": null
+  },
+  "5": {
+    "nombre": "Gorra Dril",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\05-gorra-dril.png",
+    "alt": "Gorra Dril",
+    "crop": null
+  },
+  "6": {
+    "nombre": "Chaleco Acolchado",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\06-chaleco-acolchado.png",
+    "alt": "Chaleco Acolchado",
+    "crop": null
+  },
+  "7": {
+    "nombre": "Chaqueta Acolchada",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\07-chaqueta-acolchada.png",
+    "alt": "Chaqueta Acolchada",
+    "crop": null
+  },
+  "8": {
+    "nombre": "Chaqueta Rompevientos",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\08-chaqueta-rompevientos.png",
+    "alt": "Chaqueta Rompevientos",
+    "crop": null
+  },
+  "9": {
+    "nombre": "Chaqueta Jean",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\09-chaqueta-jean.png",
+    "alt": "Chaqueta Jean",
+    "crop": null
+  },
+  "10": {
+    "nombre": "Chaqueta Cuero",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\10-chaqueta-cuero.png",
+    "alt": "Chaqueta Cuero",
+    "crop": null
+  },
+  "11": {
+    "nombre": "Hoodie Sudadera con Capota",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\11-hoodie-sudadera-con-capota.png",
+    "alt": "Hoodie Sudadera con Capota",
+    "crop": null
+  },
+  "12": {
+    "nombre": "Saco Cuello Redondo",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\12-saco-cuello-redondo.png",
+    "alt": "Saco Cuello Redondo",
+    "crop": null
+  },
+  "13": {
+    "nombre": "Uniforme Chef",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\13-uniforme-chef.png",
+    "alt": "Uniforme Chef",
+    "crop": null
+  },
+  "14": {
+    "nombre": "Uniforme de Servicio",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\14-uniforme-de-servicio.png",
+    "alt": "Uniforme de Servicio",
+    "crop": null
+  },
+  "15": {
+    "nombre": "Delantal Medico Scrub",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\15-delantal-medico-scrub.png",
+    "alt": "Delantal Medico Scrub",
+    "crop": null
+  },
+  "16": {
+    "nombre": "Cofia",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\16-cofia.png",
+    "alt": "Cofia",
+    "crop": null
+  },
+  "17": {
+    "nombre": "Bata Institucional",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\17-bata-institucional.png",
+    "alt": "Bata Institucional",
+    "crop": null
+  },
+  "18": {
+    "nombre": "Overol Industrial",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\18-overol-industrial.png",
+    "alt": "Overol Industrial",
+    "crop": null
+  },
+  "19": {
+    "nombre": "Vaso Termico Botilito",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\19-vaso-termico-botilito.png",
+    "alt": "Vaso Termico Botilito",
+    "crop": "R"
+  },
+  "20": {
+    "nombre": "Botella Metalica",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\20-botella-metalica.png",
+    "alt": "Botella Metalica",
+    "crop": "L"
+  },
+  "21": {
+    "nombre": "Vaso de Vidrio",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\21-vaso-de-vidrio.png",
+    "alt": "Vaso de Vidrio",
+    "crop": "L"
+  },
+  "22": {
+    "nombre": "Pocillo Mug Ceramica",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\22-pocillo-mug-ceramica.png",
+    "alt": "Pocillo Mug Ceramica",
+    "crop": "R"
+  },
+  "23": {
+    "nombre": "Esfero Metalico",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\23-esfero-metalico.png",
+    "alt": "Esfero Metalico",
+    "crop": null
+  },
+  "24": {
+    "nombre": "Llavero Personalizado",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\24-llavero-personalizado.png",
+    "alt": "Llavero Personalizado",
+    "crop": null
+  },
+  "25": {
+    "nombre": "Bandera Publicitaria",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\25-bandera-publicitaria.png",
+    "alt": "Bandera Publicitaria",
+    "crop": null
+  },
+  "26": {
+    "nombre": "Bolsa en Cambre",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\26-bolsa-en-cambre.png",
+    "alt": "Bolsa en Cambre",
+    "crop": null
+  },
+  "27": {
+    "nombre": "Tote Bag",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\27-tote-bag.png",
+    "alt": "Tote Bag",
+    "crop": null
+  },
+  "28": {
+    "nombre": "Mochila",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\28-mochila.png",
+    "alt": "Mochila",
+    "crop": null
+  },
+  "29": {
+    "nombre": "Maletin Deportivo Viaje",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\29-maletin-deportivo-viaje.png",
+    "alt": "Maletin Deportivo Viaje",
+    "crop": null
+  },
+  "30": {
+    "nombre": "Chaqueta Prom",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\30-chaqueta-prom.png",
+    "alt": "Chaqueta Prom",
+    "crop": null
+  },
+  "31": {
+    "nombre": "Hoodie Prom",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\31-hoodie-prom.png",
+    "alt": "Hoodie Prom",
+    "crop": null
+  },
+  "32": {
+    "nombre": "Panoleta para Mascota",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\32-panoleta-para-mascota.png",
+    "alt": "Panoleta para Mascota",
+    "crop": null
+  },
+  "33": {
+    "nombre": "Juguete para Mascota",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\33-juguete-para-mascota.png",
+    "alt": "Juguete para Mascota",
+    "crop": null
+  },
+  "34": {
+    "nombre": "Termo de Agua para Mascota",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\34-termo-de-agua-para-mascota.png",
+    "alt": "Termo de Agua para Mascota",
+    "crop": null
+  },
+  "35": {
+    "nombre": "Portacomidas para Mascota",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\35-portacomidas-para-mascota.png",
+    "alt": "Portacomidas para Mascota",
+    "crop": null
+  },
+  "36": {
+    "nombre": "Kit Accesorios Mascota",
+    "file": "C:\\Users\\Netapplicatiosn\\Downloads\\INNVOLO\\IMAGENES CATALOGO\\_staged\\36-kit-accesorios-mascota.png",
+    "alt": "Kit Accesorios Mascota",
+    "crop": null
+  }
+}
