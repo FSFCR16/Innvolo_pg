@@ -40,6 +40,10 @@ export default function DetalleProductoCliente({ producto, relacionados }) {
     : COLORES_BASE_DEFAULT
   const [colorIdx, setColorIdx] = useState(0)
 
+  // ¿La galería está en vista 3D? El color solo se elige en 3D (donde se
+  // previsualiza). GaleriaProducto lo reporta vía onVistaChange.
+  const [en3D, setEn3D] = useState(!!producto?.model3dUrl)
+
   if (!producto) return (
     <div className="max-w-7xl mx-auto px-4 py-16 text-center">
       <p className="text-gris">Producto no encontrado.</p>
@@ -59,6 +63,10 @@ export default function DetalleProductoCliente({ producto, relacionados }) {
   const fichaTecnica = fichaDinamica.length ? fichaDinamica : FICHA_TECNICA
   const colorNombre = colores[colorIdx]
   const colorHex = COLORES_HEX[colorNombre] || "#cccccc"
+
+  // El selector de color solo se habilita en la vista 3D (donde se ve el cambio).
+  // En productos sin modelo 3D queda habilitado (el color igual va en la cotización).
+  const colorHabilitado = !producto.model3dUrl || en3D
 
   // Mensaje de WhatsApp armado con la selección actual
   const mensajeWhatsApp = `Hola INNVOLO! Quiero cotizar:
@@ -86,6 +94,7 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
             model3dUrl={producto.model3dUrl}
             color={colorHex}
             nombre={producto.nombre}
+            onVistaChange={setEn3D}
           />
         </div>
 
@@ -114,7 +123,7 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
               <p className="text-[11px] font-bold tracking-[0.12em] text-primary">COLORES DISPONIBLES</p>
               <span className="text-[11px] text-gris/70">{colores.length} colores</span>
             </div>
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className={`flex flex-wrap items-center gap-2.5 transition ${colorHabilitado ? "" : "opacity-40 pointer-events-none"}`}>
               {colores.map((nombre, i) => {
                 const hex = COLORES_HEX[nombre] || "#cccccc"
                 const activo = i === colorIdx
@@ -123,6 +132,7 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
                     key={nombre}
                     type="button"
                     onClick={() => setColorIdx(i)}
+                    disabled={!colorHabilitado}
                     title={nombre}
                     aria-label={nombre}
                     aria-pressed={activo}
@@ -145,7 +155,11 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
             </div>
             <p className="text-[12px] text-gris mt-2">
               Seleccionado: <span className="font-semibold text-primary">{colorNombre}</span>
-              {producto.model3dUrl && <span className="text-gris/60"> · previsualízalo en la vista 3D</span>}
+              {producto.model3dUrl && (
+                en3D
+                  ? <span className="text-gris/60"> · se previsualiza en el 3D</span>
+                  : <span className="text-dorado font-medium"> · cambia a la vista 3D para elegir color</span>
+              )}
             </p>
           </div>
 

@@ -35,8 +35,10 @@ function Modelo({ url, color }) {
         tela.roughnessMap = null
         tela.metalness = 0
         tela.roughness = 0.8
-        tela.envMapIntensity = 0.3
-        tela.sheen = 0.35
+        // Valores bajos para que los tonos oscuros lean reales (negro = negro):
+        // el env reflejado y el sheen blanco levantaban el color a gris.
+        tela.envMapIntensity = 0.15
+        tela.sheen = 0.12
         tela.sheenRoughness = 0.8
         tela.sheenColor = new THREE.Color(0xffffff)
         child.material = tela
@@ -64,17 +66,19 @@ export default function VisorProducto3D({ modelUrl, color }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 3], fov: 45 }}
-      gl={{ antialias: true }}
+      // NeutralToneMapping = color fiel de producto (ACESFilmic, el default,
+      // aclaraba y desaturaba: por eso el negro se veía gris).
+      gl={{ antialias: true, toneMapping: THREE.NeutralToneMapping }}
       style={{ cursor: "grab" }}
     >
-      <ambientLight intensity={0.8} />
+      <ambientLight intensity={0.55} />
       <directionalLight position={[5, 5, 5]} intensity={1.0} />
       <directionalLight position={[-5, 3, -5]} intensity={0.4} />
 
       <Suspense fallback={<Html center><span className="text-gris/50 text-xs">Cargando 3D…</span></Html>}>
         {/* Bounds encuadra el modelo lo más grande posible (zoom máx. de inicio),
             adaptándose al tamaño de cada .glb. margin<1 = encuadre apretado. */}
-        <Bounds fit clip observe margin={0.85}>
+        <Bounds fit clip observe margin={1.2}>
           <Modelo url={modelUrl} color={color} />
         </Bounds>
         <Environment preset="studio" />

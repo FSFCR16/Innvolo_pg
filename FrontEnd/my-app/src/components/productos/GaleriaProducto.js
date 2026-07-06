@@ -5,7 +5,7 @@
 //  El 3D es solo de exhibición (gira). La personalización se retiró.
 // ============================================================
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Image from "next/image"
 import dynamic from "next/dynamic"
 import { FiChevronLeft, FiChevronRight, FiRotateCw } from "react-icons/fi"
@@ -18,7 +18,7 @@ const VisorProducto3D = dynamic(
   }
 )
 
-export default function GaleriaProducto({ imagenes = [], imagenFallback, model3dUrl, color, nombre }) {
+export default function GaleriaProducto({ imagenes = [], imagenFallback, model3dUrl, color, nombre, onVistaChange }) {
   // Lista de imágenes a mostrar (al menos el fallback)
   const imgs = imagenes.length > 0 ? imagenes : (imagenFallback ? [imagenFallback] : [])
 
@@ -27,6 +27,11 @@ export default function GaleriaProducto({ imagenes = [], imagenFallback, model3d
   const [vista, setVista] = useState(model3dUrl ? "3d" : 0)
 
   const en3D = vista === "3d"
+
+  // Notifica al padre si la vista activa es 3D (para habilitar/no el selector de color).
+  useEffect(() => {
+    onVistaChange?.(en3D)
+  }, [en3D, onVistaChange])
   const idxActual = typeof vista === "number" ? vista : 0
 
   const irA = (delta) => {
