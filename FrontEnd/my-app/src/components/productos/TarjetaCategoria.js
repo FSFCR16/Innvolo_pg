@@ -19,7 +19,6 @@ export function TarjetaCategoria({ nombre, imagen, href }) {
 
       <div className="absolute inset-0 flex items-end p-5 md:p-6 z-10">
         <div className="flex flex-col gap-1.5">
-          <span className="block h-px w-7 bg-dorado mb-1 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
           <span className="font-titulo font-bold text-white text-xl md:text-[1.75rem] leading-tight">
             {nombre}
           </span>

@@ -5,7 +5,6 @@ export function EncabezadoCatalogo({ eyebrow, titulo, subtitulo, total }) {
   return (
     <header className="max-w-7xl mx-auto px-4 md:px-8 pt-8 md:pt-12 pb-2 anim-page">
       <div className="flex items-center gap-2.5 mb-3">
-        <span className="h-px w-8 bg-dorado" />
         {eyebrow && (
           <p className="text-[11px] font-semibold tracking-[0.22em] text-dorado uppercase">
             {eyebrow}

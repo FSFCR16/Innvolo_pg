@@ -37,7 +37,6 @@ function BandaPremium() {
         style={{ backgroundImage: GRANO, backgroundSize: "120px 120px" }}
       />
       <div className="relative max-w-7xl mx-auto px-4 md:px-8 py-4 flex items-center gap-3">
-        <span className="h-px w-8 bg-dorado shrink-0" />
         <p className="text-[11px] md:text-xs font-semibold tracking-[0.25em] uppercase">
           {EYEBROW}
         </p>

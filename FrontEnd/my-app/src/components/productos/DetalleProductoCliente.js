@@ -100,7 +100,6 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
 
           {/* Encabezado */}
           <div>
-            <span className="block h-px w-10 bg-dorado mb-4" />
             <h1 className="font-titulo font-bold text-[2rem] md:text-[2.6rem] leading-[1.05] text-primary">
               {producto.nombre}
             </h1>
@@ -260,7 +259,6 @@ Precio estimado: ${formatoCOP(tramo.precio)}/u`
       {/* ===== Ficha técnica + info ===== */}
       <div className="max-w-3xl w-full mx-auto flex flex-col gap-3">
         <div className="flex items-center gap-2.5 mb-1">
-          <span className="h-px w-7 bg-dorado" />
           <h2 className="text-[11px] font-semibold tracking-[0.22em] text-dorado">DETALLES DEL PRODUCTO</h2>
         </div>
 

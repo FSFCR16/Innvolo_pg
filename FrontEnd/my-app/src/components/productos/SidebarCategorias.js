@@ -16,7 +16,6 @@ export default function SidebarCategorias({
       <div className="sticky top-24 flex flex-col gap-6">
 
         <div>
-          <span className="block h-px w-8 bg-dorado mb-3" />
           <h2 className="font-titulo font-bold text-2xl text-primary leading-tight">
             Categorías
           </h2>
