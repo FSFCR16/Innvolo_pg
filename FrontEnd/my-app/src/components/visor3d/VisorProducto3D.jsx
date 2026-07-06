@@ -34,7 +34,8 @@ function Modelo({ url, color }) {
         tela.metalnessMap = null
         tela.roughnessMap = null
         tela.metalness = 0
-        tela.roughness = 0.8
+        // 0.9 = tela mate (menos highlight especular → menos aspecto plástico).
+        tela.roughness = 0.9
         // Valores bajos para que los tonos oscuros lean reales (negro = negro):
         // el env reflejado y el sheen blanco levantaban el color a gris.
         tela.envMapIntensity = 0.15
@@ -79,6 +80,8 @@ export default function VisorProducto3D({ modelUrl, color }) {
       <ambientLight intensity={0.6} />
       <directionalLight position={[5, 5, 5]} intensity={1.4} />
       <directionalLight position={[-5, 3, -5]} intensity={0.55} />
+      {/* Luz de contorno (rim) detrás: separa el producto del fondo y da volumen. */}
+      <directionalLight position={[0, 4, -6]} intensity={0.7} />
 
       <Suspense fallback={<Html center><span className="text-gris/50 text-xs">Cargando 3D…</span></Html>}>
         {/* Bounds encuadra el modelo lo más grande posible (zoom máx. de inicio),

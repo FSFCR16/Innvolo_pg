@@ -42,7 +42,7 @@ export default function GaleriaProducto({ imagenes = [], imagenFallback, model3d
   return (
     <div className="flex flex-col gap-4">
       {/* === Viewport principal === */}
-      <div className="group relative aspect-square w-full overflow-hidden rounded-3xl bg-[#F6F6F3] ring-1 ring-black/5">
+      <div className="group relative aspect-square w-full overflow-hidden rounded-3xl bg-[radial-gradient(circle_at_50%_38%,#ffffff_0%,#eceae5_100%)] ring-1 ring-black/5">
         {en3D ? (
           <VisorProducto3D modelUrl={model3dUrl} color={color} />
         ) : (
