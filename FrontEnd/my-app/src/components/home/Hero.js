@@ -4,28 +4,33 @@ import { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
+const imagenes = [
+  { src: "/hero/carrusel-1.webp", alt: "Dotación corporativa INNVOLO — chaleco, termo y mochila personalizados en una oficina" },
+  { src: "/hero/carrusel-2.webp", alt: "Productos personalizados INNVOLO para empresas" },
+  { src: "/hero/carrusel-3.webp", alt: "Bandera INNVOLO ondeando sobre la ciudad" },
+  { src: "/hero/carrusel-4.webp", alt: "Indumentaria corporativa personalizada INNVOLO" },
+]
+
+const stats = [
+  { n: "10–15 días", k: "Entrega en Colombia" },
+  { n: "+36", k: "Productos personalizables" },
+  { n: "3D", k: "Previsualiza tu prenda" },
+]
+
 export default function Hero() {
-
-  const imagenes = [
-    { src: "/hero/hero_uno.jpeg", alt: "Uniformes corporativos personalizados INNVOLO" },
-    { src: "/hero/hero_dos.jpeg", alt: "Dotación empresarial de alta calidad INNVOLO" },
-    { src: "/hero/hero_tres.jpeg", alt: "Ropa corporativa personalizada con logo INNVOLO" },
-    { src: "/hero/hero_cuatro.jpeg", alt: "Indumentaria y dotación para empresas INNVOLO" },
-  ]
-
-  const [imagenActiva, setImagenActiva] = useState(0)
+  const [activa, setActiva] = useState(0)
 
   useEffect(() => {
     const intervalo = setInterval(() => {
-      setImagenActiva((actual) => (actual + 1) % imagenes.length)
-    }, 5000)
+      setActiva((actual) => (actual + 1) % imagenes.length)
+    }, 6000)
     return () => clearInterval(intervalo)
   }, [])
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen min-h-[600px] w-full overflow-hidden bg-primary">
 
-      {/* Imágenes de fondo */}
+      {/* Carrusel de imágenes (cross-fade) */}
       {imagenes.map((imagen, index) => (
         <Image
           key={imagen.src}
@@ -33,46 +38,97 @@ export default function Hero() {
           alt={imagen.alt}
           fill
           priority={index === 0}
-          className={`object-cover transition-opacity duration-1000 ${
-            index === imagenActiva ? "opacity-100" : "opacity-0"
+          sizes="100vw"
+          className={`object-cover transition-opacity duration-[1200ms] ease-in-out ${
+            index === activa ? "opacity-100" : "opacity-0"
           }`}
         />
       ))}
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/60 via-primary/65 to-primary/90" />
+      {/* Degradado navy: fuerte a la izquierda (legibilidad del texto) + base inferior */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/85 to-primary/20" />
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-transparent to-primary/25" />
+      {/* Halo dorado sutil */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-60"
+        style={{ background: "radial-gradient(120% 90% at 78% 15%, rgba(201,162,75,.18), transparent 55%)" }}
+      />
 
-      {/* Texto */}
-      <div className="absolute inset-0 flex flex-col justify-center items-center gap-6 px-6 md:px-24 text-center">
+      {/* Contenido editorial (alineado a la izquierda) */}
+      <div className="relative h-full max-w-7xl mx-auto px-6 md:px-8 flex items-center">
+        <div className="max-w-2xl flex flex-col anim-page">
 
-        {/* Desktop EXACTO / Mobile ajustado */}
-        <h1 className="font-sans font-bold text-3xl md:text-6xl text-white leading-tight text-center md:text-start">
-          Somos una<br/>
-          <span className="ml-0 md:ml-16">empresa de</span>
-        </h1>
+          {/* Eyebrow + regla dorada */}
+          <div className="flex items-center gap-3 mb-5">
+            <span className="h-px w-12 bg-dorado" />
+            <span className="text-[10px] md:text-xs font-bold tracking-[0.26em] uppercase text-dorado">
+              Dotación e indumentaria corporativa
+            </span>
+          </div>
 
-        {/* Desktop intacto */}
-        <h2 className="font-cursiva text-2xl md:text-5xl text-dorado">
-          dotación e indumentaria
-        </h2>
+          {/* Titular Playfair + acento cursivo */}
+          <h1 className="font-titulo font-semibold text-white text-[2.5rem] leading-[1.04] md:text-[4rem] md:leading-[1.03]">
+            Vestimos la identidad<br className="hidden sm:block" /> de tu empresa
+          </h1>
+          <span className="font-cursiva text-dorado text-3xl md:text-5xl mt-2 md:mt-3">
+            con diseño e innovación
+          </span>
 
-        {/* SOLO FIX ancho mobile */}
-        <div className="flex flex-col gap-2 w-full max-w-md md:max-w-none">
-          <p className="text-white/80 text-sm">Diseñamos y producimos prendas</p>
-          <p className="text-white/80 text-sm">
-            Para empresas que quieren proyectar identidad, estilo e innovación.
+          {/* Subtítulo */}
+          <p className="text-white/75 text-sm md:text-[15px] max-w-lg mt-6 leading-relaxed">
+            Diseñamos y producimos prendas y dotación para empresas que quieren
+            proyectar identidad, estilo e innovación — en toda Colombia.
           </p>
+
+          {/* CTAs */}
+          <div className="flex flex-wrap gap-3 mt-8">
+            <Link
+              href="/catalogo"
+              className="px-7 py-3.5 rounded-lg bg-dorado text-primary text-xs md:text-sm font-bold tracking-widest uppercase inline-flex items-center gap-2 hover:brightness-105 hover:-translate-y-0.5 active:scale-[0.99] transition"
+            >
+              Ver catálogo <span aria-hidden>→</span>
+            </Link>
+            <Link
+              href="/contactanos"
+              className="px-7 py-3.5 rounded-lg border-[1.5px] border-white/55 text-white text-xs md:text-sm font-bold tracking-widest uppercase hover:bg-white hover:text-primary hover:-translate-y-0.5 active:scale-[0.99] transition"
+            >
+              Cotizar ahora
+            </Link>
+          </div>
+
+          {/* Datos de confianza */}
+          <div className="flex flex-wrap gap-x-8 gap-y-4 md:gap-x-10 mt-10">
+            {stats.map((s) => (
+              <div key={s.k} className="flex flex-col">
+                <span className="font-titulo font-semibold text-dorado text-xl md:text-2xl leading-none">
+                  {s.n}
+                </span>
+                <span className="text-[10px] md:text-[11px] uppercase tracking-[0.12em] text-white/55 mt-1.5">
+                  {s.k}
+                </span>
+              </div>
+            ))}
+          </div>
+
         </div>
-
-        {/* Botón igual (solo padding mobile leve) */}
-        <Link
-          href="/contactanos"
-          className="mt-2 px-8 md:px-10 py-3 bg-white text-primary text-sm tracking-widest uppercase font-bold hover:bg-dorado hover:text-white transition-colors duration-300"
-        >
-          Cotiza ya
-        </Link>
-
       </div>
-    </div>
+
+      {/* Indicadores del carrusel */}
+      <div className="absolute bottom-6 left-6 md:left-auto md:right-10 z-10 flex gap-2">
+        {imagenes.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => setActiva(i)}
+            aria-label={`Ver imagen ${i + 1}`}
+            aria-pressed={i === activa}
+            className={`h-1.5 rounded-full transition-all duration-300 ${
+              i === activa ? "w-7 bg-dorado" : "w-2.5 bg-white/40 hover:bg-white/70"
+            }`}
+          />
+        ))}
+      </div>
+
+    </section>
   )
 }
